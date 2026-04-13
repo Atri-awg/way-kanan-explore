@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum TipeMedia {
+  IMAGE
+  VIDEO
+}
+
+model Pengguna {
+  id        String  @id @default(uuid())
+  email     String  @unique
+  kataSandi String
+  nama      String?
+  avatar    String?
+  role      Role    @default(USER)
+  aktif     Boolean @default(true)
+
+  dibuatPada     DateTime @default(now())
+  diperbaruiPada DateTime @updatedAt
+
+  // relasi
+  ulasan    Ulasan[]
+  bookmark  Bookmark[]
+  destinasi Destinasi[]    @relation("DibuatOleh")
+  media     Media[]
+  token     TokenRefresh[]
+}
+
+model Destinasi {
+  id        String @id @default(uuid())
+  judul     String
+  deskripsi String
+  lokasi    String
+
+  dibuatOlehId String
+  dibuatOleh   Pengguna @relation("DibuatOleh", fields: [dibuatOlehId], references: [id])
+
+  kategori DestinasiKategori[]
+  ulasan   Ulasan[]
+  media    Media[]
+  bookmark Bookmark[] // ✅ WAJIB ADA INI
+
+  dibuatPada     DateTime @default(now())
+  diperbaruiPada DateTime @updatedAt
+}
+
+model Kategori {
+  id   String @id @default(uuid())
+  nama String @unique
+
+  destinasi DestinasiKategori[]
+
+  dibuatPada DateTime @default(now())
+}
+
+model DestinasiKategori {
+  destinasiId String
+  kategoriId  String
+
+  destinasi Destinasi @relation(fields: [destinasiId], references: [id])
+  kategori  Kategori  @relation(fields: [kategoriId], references: [id])
+
+  @@id([destinasiId, kategoriId])
+}
+
+model Ulasan {
+  id       String  @id @default(uuid())
+  rating   Int
+  komentar String?
+
+  penggunaId  String
+  destinasiId String
+
+  pengguna  Pengguna  @relation(fields: [penggunaId], references: [id])
+  destinasi Destinasi @relation(fields: [destinasiId], references: [id])
+
+  dibuatPada DateTime @default(now())
+}
+
+model Bookmark {
+  id String @id @default(uuid())
+
+  penggunaId  String
+  destinasiId String
+
+  pengguna  Pengguna  @relation(fields: [penggunaId], references: [id])
+  destinasi Destinasi @relation(fields: [destinasiId], references: [id])
+
+  dibuatPada DateTime @default(now())
+
+  @@unique([penggunaId, destinasiId])
+}
+
+model Media {
+  id   String    @id @default(uuid())
+  url  String
+  tipe TipeMedia
+
+  destinasiId String
+  destinasi   Destinasi @relation(fields: [destinasiId], references: [id])
+
+  diunggahOlehId String
+  diunggahOleh   Pengguna @relation(fields: [diunggahOlehId], references: [id])
+
+  dibuatPada DateTime @default(now())
+}
+
+model TokenRefresh {
+  id    String @id @default(uuid())
+  token String @unique
+
+  penggunaId String
+  pengguna   Pengguna @relation(fields: [penggunaId], references: [id])
+
+  kadaluarsa DateTime
+  dibuatPada DateTime @default(now())
+}
