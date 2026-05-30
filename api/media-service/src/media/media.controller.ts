@@ -12,9 +12,7 @@ import { MediaService } from './media.service';
 
 @Controller('media')
 export class MediaController {
-  constructor(
-    private readonly mediaService: MediaService,
-  ) {}
+  constructor(private readonly mediaService: MediaService) {}
 
   @Post()
   create(@Body() body: any) {
@@ -32,10 +30,7 @@ export class MediaController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() body: any,
-  ) {
+  update(@Param('id') id: string, @Body() body: any) {
     return this.mediaService.update(id, body);
   }
 
