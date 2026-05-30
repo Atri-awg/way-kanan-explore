@@ -1,56 +1,158 @@
+"use client";
+
+import Link from "next/link";
 import {
   LayoutDashboard,
   FileText,
-  MapPinned,
+  MapPin,
   Image,
   Video,
+  Tag,
+  MessageSquare,
   Users,
   Settings,
+  Database,
+  Clock3,
+  Globe,
+  Menu,
 } from "lucide-react";
 
 export default function Sidebar() {
   return (
-    <div className="w-64 h-screen bg-gray-600 text-white p-5 fixed">
-      <h1 className="text-2xl font-bold mb-10">
-        Waykanan Explorer
-      </h1>
+    <aside className="w-72 bg-[#0F4C3A] text-white min-h-screen flex flex-col">
+      {/* Logo */}
+      <div className="h-24 flex items-center justify-center border-b border-green-800">
+        <h1 className="text-3xl font-bold italic">
+          Waykanan Explore
+        </h1>
+      </div>
 
-      <ul className="space-y-4">
-        <li className="flex items-center gap-3 hover:text-gray-300 cursor-pointer">
-          <LayoutDashboard size={20} />
-          Dashboard
-        </li>
+      {/* Menu */}
+      <div className="flex-1 overflow-y-auto px-4 py-6">
+        <p className="text-xs text-green-200 mb-3 uppercase">
+          Konten
+        </p>
 
-        <li className="flex items-center gap-3 hover:text-gray-300 cursor-pointer">
-          <FileText size={20} />
-          Artikel
-        </li>
+        <MenuItem
+          icon={<LayoutDashboard size={18} />}
+          href="/dashboard"
+          label="Dashboard"
+          active
+        />
 
-        <li className="flex items-center gap-3 hover:text-gray-300 cursor-pointer">
-          <MapPinned size={20} />
-          Destinasi
-        </li>
+        <MenuItem
+          icon={<FileText size={18} />}
+          href="/artikel"
+          label="Artikel"
+        />
 
-        <li className="flex items-center gap-3 hover:text-gray-300 cursor-pointer">
-          <Image size={20} />
-          Galeri
-        </li>
+        <MenuItem
+          icon={<MapPin size={18} />}
+          href="/app/destinasi"
+          label="Destinasi"
+        />
 
-        <li className="flex items-center gap-3 hover:text-gray-300 cursor-pointer">
-          <Video size={20} />
-          Video
-        </li>
+        <MenuItem
+          icon={<Image size={18} />}
+          href="/galeri"
+          label="Galeri"
+        />
 
-        <li className="flex items-center gap-3 hover:text-gray-300 cursor-pointer">
-          <Users size={20} />
-          Pengguna
-        </li>
+        <MenuItem
+          icon={<Video size={18} />}
+          href="/video"
+          label="Video"
+        />
 
-        <li className="flex items-center gap-3 hover:text-gray-300 cursor-pointer">
-          <Settings size={20} />
+        <MenuItem
+          icon={<Tag size={18} />}
+          href="/kategori"
+          label="Kategori"
+        />
+
+        <MenuItem
+          icon={<MessageSquare size={18} />}
+          href="/komentar"
+          label="Komentar"
+        />
+
+        <p className="text-xs text-green-200 mt-8 mb-3 uppercase">
           Pengaturan
-        </li>
-      </ul>
-    </div>
+        </p>
+
+        <MenuItem
+          icon={<Globe size={18} />}
+          href="/banner"
+          label="Banner"
+        />
+
+        <MenuItem
+          icon={<Menu size={18} />}
+          href="/menu"
+          label="Menu"
+        />
+
+        <MenuItem
+          icon={<Users size={18} />}
+          href="/pengguna"
+          label="Pengguna"
+        />
+
+        <p className="text-xs text-green-200 mt-8 mb-3 uppercase">
+          Sistem
+        </p>
+
+        <MenuItem
+          icon={<Settings size={18} />}
+          href="/website"
+          label="Pengaturan Website"
+        />
+
+        <MenuItem
+          icon={<Database size={18} />}
+          href="/backup"
+          label="Backup"
+        />
+
+        <MenuItem
+          icon={<Clock3 size={18} />}
+          href="/aktivitas"
+          label="Log Aktivitas"
+        />
+      </div>
+
+      {/* Footer */}
+      <div className="p-4 border-t border-green-800">
+        <button className="w-full border border-green-600 rounded-lg py-3 hover:bg-green-800 transition">
+          Lihat Website
+        </button>
+      </div>
+    </aside>
+  );
+}
+
+function MenuItem({
+  icon,
+  href,
+  label,
+  active = false,
+}: {
+  icon: React.ReactNode;
+  href: string;
+  label: string;
+  active?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition ${
+        active
+          ? "bg-green-700"
+          : "hover:bg-green-800"
+      }`}
+    >
+      {icon}
+      <span>{label}</span>
+    </Link>
   );
 }
