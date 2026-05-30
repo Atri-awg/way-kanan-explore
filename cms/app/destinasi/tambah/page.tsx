@@ -18,6 +18,12 @@ export default function TambahDestinasiPage() {
           className="w-full rounded-lg border p-3"
         />
 
+        <input
+          type="text"
+          placeholder="Harga Tiket"
+          className="w-full rounded-lg border p-3"
+        />
+
         <textarea
           placeholder="Deskripsi"
           className="w-full rounded-lg border p-3"
