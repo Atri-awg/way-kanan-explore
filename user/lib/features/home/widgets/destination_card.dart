@@ -8,12 +8,12 @@ class DestinationCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const DestinationCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.location,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class DestinationCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withValues(alpha: 0.08),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -50,7 +50,7 @@ class DestinationCard extends StatelessWidget {
                       child: Icon(
                         Icons.image,
                         size: 50,
-                        color: AppColors.textGrey.withOpacity(0.3),
+                        color: AppColors.textGrey.withValues(alpha: 0.3),
                       ),
                     ),
                     // Jika ingin pakai network image atau asset

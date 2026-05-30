@@ -5,7 +5,7 @@ import 'package:user/features/home/widgets/feature_card.dart';
 import 'package:user/features/home/widgets/destination_card.dart';
 
 class HomeDesktop extends StatelessWidget {
-  const HomeDesktop({Key? key}) : super(key: key);
+  const HomeDesktop({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class HomeDesktop extends StatelessWidget {
         color: AppColors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -149,8 +149,8 @@ class HomeDesktop extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.black.withOpacity(0.4),
-              Colors.black.withOpacity(0.6),
+              Colors.black.withValues(alpha: 0.4),
+              Colors.black.withValues(alpha: 0.6),
             ],
           ),
         ),
