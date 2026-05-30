@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FileText,
@@ -18,6 +19,8 @@ import {
 } from "lucide-react";
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <aside className="w-72 bg-[#0F4C3A] text-white min-h-screen flex flex-col">
       {/* Logo */}
@@ -37,43 +40,49 @@ export default function Sidebar() {
           icon={<LayoutDashboard size={18} />}
           href="/dashboard"
           label="Dashboard"
-          active
+          active={pathname === "/dashboard"}
         />
 
         <MenuItem
           icon={<FileText size={18} />}
           href="/artikel"
           label="Artikel"
+          active={pathname.startsWith("/artikel")}
         />
 
         <MenuItem
           icon={<MapPin size={18} />}
-          href="/app/destinasi"
+          href="/destinasi"
           label="Destinasi"
+          active={pathname.startsWith("/destinasi")}
         />
 
         <MenuItem
           icon={<Image size={18} />}
           href="/galeri"
           label="Galeri"
+          active={pathname.startsWith("/galeri")}
         />
 
         <MenuItem
           icon={<Video size={18} />}
           href="/video"
           label="Video"
+          active={pathname.startsWith("/video")}
         />
 
         <MenuItem
           icon={<Tag size={18} />}
           href="/kategori"
           label="Kategori"
+          active={pathname.startsWith("/kategori")}
         />
 
         <MenuItem
           icon={<MessageSquare size={18} />}
           href="/komentar"
           label="Komentar"
+          active={pathname.startsWith("/komentar")}
         />
 
         <p className="text-xs text-green-200 mt-8 mb-3 uppercase">
@@ -84,18 +93,21 @@ export default function Sidebar() {
           icon={<Globe size={18} />}
           href="/banner"
           label="Banner"
+          active={pathname.startsWith("/banner")}
         />
 
         <MenuItem
           icon={<Menu size={18} />}
           href="/menu"
           label="Menu"
+          active={pathname.startsWith("/menu")}
         />
 
         <MenuItem
           icon={<Users size={18} />}
           href="/pengguna"
           label="Pengguna"
+          active={pathname.startsWith("/pengguna")}
         />
 
         <p className="text-xs text-green-200 mt-8 mb-3 uppercase">
@@ -106,22 +118,24 @@ export default function Sidebar() {
           icon={<Settings size={18} />}
           href="/website"
           label="Pengaturan Website"
+          active={pathname.startsWith("/website")}
         />
 
         <MenuItem
           icon={<Database size={18} />}
           href="/backup"
           label="Backup"
+          active={pathname.startsWith("/backup")}
         />
 
         <MenuItem
           icon={<Clock3 size={18} />}
           href="/aktivitas"
           label="Log Aktivitas"
+          active={pathname.startsWith("/aktivitas")}
         />
       </div>
 
-      {/* Footer */}
       <div className="p-4 border-t border-green-800">
         <button className="w-full border border-green-600 rounded-lg py-3 hover:bg-green-800 transition">
           Lihat Website
@@ -147,8 +161,8 @@ function MenuItem({
       href={href}
       className={`flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition ${
         active
-          ? "bg-green-700"
-          : "hover:bg-green-800"
+          ? "bg-green-700 text-white"
+          : "hover:bg-green-800 text-green-100"
       }`}
     >
       {icon}

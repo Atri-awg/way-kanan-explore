@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import {
   Bell,
   Search,
@@ -7,13 +8,59 @@ import {
 } from "lucide-react";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const getTitle = () => {
+    if (pathname === "/dashboard") {
+      return "Dashboard";
+    }
+
+    if (pathname === "/destinasi") {
+      return "Kelola Destinasi";
+    }
+
+    if (pathname === "/destinasi/tambah") {
+      return "Tambah Destinasi";
+    }
+
+    if (pathname.includes("/destinasi/edit")) {
+      return "Edit Destinasi";
+    }
+
+    if (pathname === "/artikel") {
+      return "Kelola Artikel";
+    }
+
+    if (pathname === "/artikel/tambah") {
+      return "Tambah Artikel";
+    }
+
+    if (pathname.includes("/artikel/edit")) {
+      return "Edit Artikel";
+    }
+
+    if (pathname === "/kategori") {
+      return "Kelola Kategori";
+    }
+
+    if (pathname === "/pengguna") {
+      return "Kelola Pengguna";
+    }
+
+    return "Waykanan Explore CMS";
+  };
+
   return (
     <header className="h-20 bg-white border-b flex items-center justify-between px-8">
       {/* Left */}
       <div>
-        <h1 className="text-xl font-semibold">
-          Dashboard
+        <h1 className="text-2xl font-bold">
+          {getTitle()}
         </h1>
+
+        <p className="text-sm text-gray-500">
+          Content Management System
+        </p>
       </div>
 
       {/* Right */}
@@ -23,7 +70,7 @@ export default function Navbar() {
           <input
             type="text"
             placeholder="Cari sesuatu..."
-            className="w-72 border rounded-lg py-2 pl-10 pr-4"
+            className="w-72 border rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
 
           <Search
@@ -45,7 +92,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3 cursor-pointer">
           <img
             src="https://i.pravatar.cc/100"
-            alt="admin"
+            alt="Admin"
             className="w-10 h-10 rounded-full"
           />
 
