@@ -4,9 +4,7 @@ import { PrismaModule } from './prisma/prisma.module';
 
 import { MediaModule } from './media/media.module';
 
-import { UploadModule } from './upload/upload.module';
-
 @Module({
-  imports: [PrismaModule, MediaModule, UploadModule],
+  imports: [PrismaModule, MediaModule],
 })
 export class AppModule {}
