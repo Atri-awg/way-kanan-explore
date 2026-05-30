@@ -421,8 +421,8 @@ class AppTheme {
     );
   }
 
-  static TabBarTheme _tabBarTheme(bool isDark) {
-    return TabBarTheme(
+  static TabBarThemeData _tabBarTheme(bool isDark) {
+    return TabBarThemeData(
       // No indicator border — underline only via labelStyle
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(
