@@ -35,8 +35,6 @@ export class UploadController {
     @UploadedFile()
     file: Express.Multer.File,
   ) {
-    return this.uploadService.upload(
-      file,
-    );
+    return this.uploadService.upload(file);
   }
 }
