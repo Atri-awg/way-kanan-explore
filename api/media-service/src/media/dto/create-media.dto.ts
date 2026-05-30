@@ -1,20 +1,37 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import {
+  IsEnum,
+  IsOptional,
+  IsString,
+  IsUrl,
+  MaxLength,
+} from 'class-validator';
 
-import { MediaType } from '../enums/media-type.enum';
+import { MediaType } from '@prisma/client';
 
 export class CreateMediaDto {
   @IsString()
-  title: string;
+  @MaxLength(255)
+  title!: string;
 
   @IsOptional()
+  @IsString()
+  @MaxLength(1000)
   description?: string;
 
+  @IsUrl()
+  url!: string;
+
+  @IsString()
+  publicId!: string;
+
   @IsEnum(MediaType)
-  fileType: MediaType;
+  type!: MediaType;
 
+  @IsOptional()
   @IsString()
-  fileName: string;
+  destinationId?: string;
 
+  @IsOptional()
   @IsString()
-  filePath: string;
+  articleId?: string;
 }

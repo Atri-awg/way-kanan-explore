@@ -7,6 +7,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
+import { MediaType, Prisma } from '@prisma/client';
+
 import { PrismaService } from '../prisma/prisma.service';
 
 import { CreateMediaDto } from './dto/create-media.dto';
@@ -19,7 +21,15 @@ export class MediaService {
   async create(createMediaDto: CreateMediaDto) {
     const exist = await this.prisma.media.findFirst({
       where: {
-        fileName: createMediaDto.fileName,
+        deletedAt: null,
+        OR: [
+          {
+            title: createMediaDto.title,
+          },
+          {
+            publicId: createMediaDto.publicId,
+          },
+        ],
       },
     });
 
@@ -33,7 +43,7 @@ export class MediaService {
       });
     }
 
-    await this.prisma.media.create({
+    const media = await this.prisma.media.create({
       data: createMediaDto,
     });
 
@@ -43,41 +53,61 @@ export class MediaService {
       metadata: {
         status: HttpStatus.CREATED,
       },
+      data: media,
     };
   }
 
-  async findAll() {
-    const data = await this.prisma.media.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+  async findAll(page = 1, limit = 10, search?: string, type?: MediaType) {
+    const skip = (page - 1) * limit;
 
-    if (data.length === 0) {
-      throw new NotFoundException({
-        success: false,
-        message: 'Data media tidak ditemukan',
-        metadata: {
-          status: HttpStatus.NOT_FOUND,
-          total_data: data.length,
-        },
-      });
+    const where: Prisma.MediaWhereInput = {
+      deletedAt: null,
+    };
+
+    if (search) {
+      where.title = {
+        contains: search,
+        mode: 'insensitive',
+      };
     }
+
+    if (type) {
+      where.type = type;
+    }
+
+    const [data, total] = await Promise.all([
+      this.prisma.media.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+
+      this.prisma.media.count({
+        where,
+      }),
+    ]);
 
     return {
       success: true,
-      message: '',
       metadata: {
         status: HttpStatus.OK,
-        total_data: data.length,
+        page,
+        limit,
+        total_data: total,
       },
       data,
     };
   }
 
   async findOne(id: string) {
-    const media = await this.prisma.media.findUnique({
-      where: { id },
+    const media = await this.prisma.media.findFirst({
+      where: {
+        id,
+        deletedAt: null,
+      },
     });
 
     if (!media) {
@@ -92,7 +122,6 @@ export class MediaService {
 
     return {
       success: true,
-      message: '',
       metadata: {
         status: HttpStatus.OK,
       },
@@ -102,8 +131,11 @@ export class MediaService {
 
   async update(id: string, updateMediaDto: UpdateMediaDto) {
     try {
-      const media = await this.prisma.media.findUnique({
-        where: { id },
+      const media = await this.prisma.media.findFirst({
+        where: {
+          id,
+          deletedAt: null,
+        },
       });
 
       if (!media) {
@@ -116,7 +148,29 @@ export class MediaService {
         });
       }
 
-      await this.prisma.media.update({
+      if (updateMediaDto.title) {
+        const exist = await this.prisma.media.findFirst({
+          where: {
+            deletedAt: null,
+            NOT: {
+              id,
+            },
+            title: updateMediaDto.title,
+          },
+        });
+
+        if (exist) {
+          throw new ConflictException({
+            success: false,
+            message: 'Judul media sudah digunakan',
+            metadata: {
+              status: HttpStatus.CONFLICT,
+            },
+          });
+        }
+      }
+
+      const updated = await this.prisma.media.update({
         where: { id },
         data: updateMediaDto,
       });
@@ -127,6 +181,7 @@ export class MediaService {
         metadata: {
           status: HttpStatus.OK,
         },
+        data: updated,
       };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -145,8 +200,11 @@ export class MediaService {
 
   async remove(id: string) {
     try {
-      const media = await this.prisma.media.findUnique({
-        where: { id },
+      const media = await this.prisma.media.findFirst({
+        where: {
+          id,
+          deletedAt: null,
+        },
       });
 
       if (!media) {
@@ -159,8 +217,12 @@ export class MediaService {
         });
       }
 
-      await this.prisma.media.delete({
+      await this.prisma.media.update({
         where: { id },
+        data: {
+          status: false,
+          deletedAt: new Date(),
+        },
       });
 
       return {
@@ -183,5 +245,34 @@ export class MediaService {
         },
       });
     }
+  }
+
+  async restore(id: string) {
+    const media = await this.prisma.media.findUnique({
+      where: { id },
+    });
+
+    if (!media) {
+      throw new NotFoundException({
+        success: false,
+        message: 'Media tidak ditemukan',
+      });
+    }
+
+    await this.prisma.media.update({
+      where: { id },
+      data: {
+        deletedAt: null,
+        status: true,
+      },
+    });
+
+    return {
+      success: true,
+      message: 'Media berhasil direstore',
+      metadata: {
+        status: HttpStatus.OK,
+      },
+    };
   }
 }

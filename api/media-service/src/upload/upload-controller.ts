@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Controller,
   Post,
   UploadedFile,
@@ -24,17 +25,43 @@ export class UploadController {
         destination: './uploads',
 
         filename: (req, file, cb) => {
-          const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const uniqueName = `${Date.now()}${extname(file.originalname)}`;
 
-          cb(null, unique + extname(file.originalname));
+          cb(null, uniqueName);
         },
       }),
+
+      limits: {
+        fileSize: 5 * 1024 * 1024,
+      },
+
+      fileFilter: (req, file, cb) => {
+        const allowedTypes = [
+          'image/jpeg',
+          'image/jpg',
+          'image/png',
+          'image/webp',
+        ];
+
+        if (!allowedTypes.includes(file.mimetype)) {
+          return cb(
+            new BadRequestException('Format file tidak didukung'),
+            false,
+          );
+        }
+
+        cb(null, true);
+      },
     }),
   )
   upload(
     @UploadedFile()
     file: Express.Multer.File,
   ) {
+    if (!file) {
+      throw new BadRequestException('File wajib diupload');
+    }
+
     return this.uploadService.upload(file);
   }
 }
