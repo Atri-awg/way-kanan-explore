@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user/features/home/screens/home_page.dart';
+import 'package:user/features/travel_list/travel_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: TravelListPage(),
       // theme: ThemeData(
       //   useMaterial3: true,
       //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
