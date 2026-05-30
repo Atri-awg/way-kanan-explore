@@ -8,6 +8,7 @@ async function bootstrap() {
   app.enableCors();
 
   await app.listen(process.env.PORT || 3004);
+  console.log(process.env.DATABASE_URL);
 }
 
 bootstrap();
