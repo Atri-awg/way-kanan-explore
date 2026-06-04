@@ -30,6 +30,31 @@ export default function TambahDestinasiPage() {
           rows={5}
         />
 
+        {/* Upload Galeri */}
+        <div>
+          <label className="mb-2 block font-medium">
+            Galeri Foto
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            className="w-full rounded-lg border p-3"
+          />
+        </div>
+
+        {/* Upload Video */}
+        <div>
+          <label className="mb-2 block font-medium">
+            Video Destinasi
+          </label>
+          <input
+            type="file"
+            accept="video/*"
+            className="w-full rounded-lg border p-3"
+          />
+        </div>
+
         <button
           type="submit"
           className="rounded-lg bg-blue-600 px-5 py-2 text-white"
