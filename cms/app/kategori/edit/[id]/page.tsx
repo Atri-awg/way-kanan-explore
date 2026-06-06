@@ -75,9 +75,12 @@ export default function EditKategoriPage() {
         <div className="flex gap-3">
           <button
             type="submit"
+            onClick={() =>
+              router.push("/kategori")
+            }
             className="rounded-lg bg-green-600 px-5 py-3 text-white"
           >
-            Simpan
+            Simpan Perubahan
           </button>
 
           <button
