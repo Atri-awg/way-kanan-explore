@@ -59,7 +59,7 @@ export default function KategoriTable() {
               <td className="p-3">
                 <div className="flex gap-2">
                   <Link
-                    href={`/kategori/${item.id}/edit`}
+                    href={`/kategori/edit/${item.id}`}
                     className="rounded-lg bg-blue-100 p-2 text-blue-600"
                   >
                     <Pencil size={16} />

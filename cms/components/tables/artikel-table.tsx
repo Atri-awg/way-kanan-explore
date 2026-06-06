@@ -53,7 +53,7 @@ export default function ArtikelTable() {
               <td className="p-3">
                 <div className="flex gap-2">
                   <Link
-                    href={`/artikel/${item.id}/edit`}
+                    href={`/artikel/edit/${item.id}`}
                     className="bg-blue-100 text-blue-600 p-2 rounded-lg"
                   >
                     <Pencil size={16} />
