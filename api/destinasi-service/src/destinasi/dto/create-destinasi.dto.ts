@@ -1,26 +1,21 @@
-import {
-  IsNotEmpty,
-  IsString,
-  IsOptional,
-  IsBoolean,
-} from 'class-validator';
+import { IsNotEmpty, IsString, IsOptional, IsBoolean } from 'class-validator';
 
 export class CreateDestinasiDto {
   @IsNotEmpty()
   @IsString()
-  name: string;
+  name!: string;
 
   @IsNotEmpty()
   @IsString()
-  slug: string;
+  slug!: string;
 
   @IsNotEmpty()
   @IsString()
-  description: string;
+  description!: string;
 
   @IsNotEmpty()
   @IsString()
-  location: string;
+  location!: string;
 
   @IsOptional()
   @IsString()
@@ -28,7 +23,7 @@ export class CreateDestinasiDto {
 
   @IsNotEmpty()
   @IsString()
-  categoryId: string;
+  categoryId!: string;
 
   @IsOptional()
   @IsBoolean()
