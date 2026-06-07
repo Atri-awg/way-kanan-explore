@@ -14,7 +14,11 @@ export class DestinasiService {
   }
 
   async findAll() {
-    return this.prisma.destinasi.findMany();
+    return this.prisma.destinasi.findMany({
+      where: {
+        deletedAt: null,
+      },
+    });
   }
 
   findOne(id: number) {
