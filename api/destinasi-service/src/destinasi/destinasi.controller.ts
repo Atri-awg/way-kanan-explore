@@ -8,8 +8,8 @@ export class DestinasiController {
   constructor(private readonly destinasiService: DestinasiService) {}
 
   @Post()
-  create(@Body() createDestinasiDto: CreateDestinasiDto) {
-    return this.destinasiService.create(createDestinasiDto);
+  create(@Body() dto: CreateDestinasiDto) {
+    return this.destinasiService.create(dto);
   }
 
   @Get()
