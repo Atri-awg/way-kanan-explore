@@ -14,11 +14,15 @@ datasource db {
 }
 
 model Destinasi {
-  id          String   @id @default(uuid())
+  id          Int      @id @default(autoincrement())
+
   name        String
   slug        String   @unique
+
   description String
+
   location    String
+
   thumbnail   String?
 
   categoryId  String
@@ -30,4 +34,5 @@ model Destinasi {
   deletedAt   DateTime?
 
   @@index([slug])
+  @@index([categoryId])
 }
