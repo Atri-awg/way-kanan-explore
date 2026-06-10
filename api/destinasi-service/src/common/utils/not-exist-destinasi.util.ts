@@ -1,11 +1,12 @@
 import { HttpStatus, NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 export async function notExistDestinasi(
-  model: any,
+  prisma: PrismaService,
   id: number,
   message: string,
 ) {
-  const data = await model.findFirst({
+  const data = await prisma.destinasi.findFirst({
     where: {
       id,
       deletedAt: null,

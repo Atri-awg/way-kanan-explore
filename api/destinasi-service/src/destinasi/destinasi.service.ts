@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDestinasiDto } from './dto/create-destinasi.dto';
 import { UpdateDestinasiDto } from './dto/update-destinasi.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -8,9 +8,18 @@ export class DestinasiService {
   constructor(private prisma: PrismaService) {}
 
   async create(dto: CreateDestinasiDto) {
-    return this.prisma.destinasi.create({
+    const data = await this.prisma.destinasi.create({
       data: dto,
     });
+
+    return {
+      success: true,
+      message: process.env.SUCCESS_SAVE,
+      metadata: {
+        status: HttpStatus.CREATED,
+      },
+      data,
+    };
   }
 
   async findAll() {
