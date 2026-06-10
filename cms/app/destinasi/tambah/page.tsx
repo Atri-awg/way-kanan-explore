@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function TambahDestinasiPage() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function TambahDestinasiPage() {
     }));
   };
 
-  const handleSubmit = async (
+ const handleSubmit = async (
     e: React.FormEvent
   ) => {
     e.preventDefault();
@@ -77,14 +78,17 @@ export default function TambahDestinasiPage() {
         );
       }
 
-      alert(
+      toast.success(
         "Destinasi berhasil ditambahkan!"
       );
 
       router.push("/destinasi");
     } catch (error) {
       console.error(error);
-      alert("Gagal menyimpan destinasi");
+
+      toast.error(
+        "Gagal menyimpan destinasi"
+      );
     } finally {
       setLoading(false);
     }

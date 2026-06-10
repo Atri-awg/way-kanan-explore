@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Pencil, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface Destinasi {
   id: number;
@@ -59,10 +60,10 @@ export default function DestinasiTable() {
       );
 
       if (!res.ok) {
-        throw new Error("Gagal menghapus data");
+        toast.error("Gagal menghapus destinasi");
       }
 
-      alert("Destinasi berhasil dihapus");
+      toast.success("Destinasi berhasil dihapus");
 
       // refresh data
       setDestinasi((prev) =>

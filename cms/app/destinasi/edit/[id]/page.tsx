@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function EditDestinasiPage() {
   
@@ -90,9 +91,7 @@ export default function EditDestinasiPage() {
         );
       }
 
-      alert(
-        "Destinasi berhasil diperbarui"
-      );
+      toast.success("Destinasi berhasil diperbarui");
 
       router.push("/destinasi");
     } catch (error) {
