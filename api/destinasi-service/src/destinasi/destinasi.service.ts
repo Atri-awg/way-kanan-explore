@@ -36,8 +36,13 @@ export class DestinasiService {
     return destinasi;
   }
 
-  update(id: number, updateDestinasiDto: UpdateDestinasiDto) {
-    return `This action updates a #${id} destinasi`;
+  async update(id: number, dto: UpdateDestinasiDto) {
+    await this.findOne(id);
+
+    return this.prisma.destinasi.update({
+      where: { id },
+      data: dto,
+    });
   }
 
   remove(id: number) {
