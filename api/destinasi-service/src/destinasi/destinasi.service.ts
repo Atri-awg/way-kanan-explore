@@ -49,12 +49,20 @@ export class DestinasiService {
   }
 
   async update(id: number, dto: UpdateDestinasiDto) {
-    await this.findOne(id);
-
-    return this.prisma.destinasi.update({
+    await notExistDestinasi(this.prisma, id, 'Destinasi tidak ditemukan');
+    const data = await this.prisma.destinasi.update({
       where: { id },
       data: dto,
     });
+
+    return {
+      success: true,
+      message: 'Berhasil memperbarui destinasi',
+      metadata: {
+        status: HttpStatus.OK,
+      },
+      data,
+    };
   }
 
   async remove(id: number) {
