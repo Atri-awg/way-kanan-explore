@@ -31,7 +31,7 @@ export class DestinasiController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.destinasiService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.destinasiService.remove(id);
   }
 }
