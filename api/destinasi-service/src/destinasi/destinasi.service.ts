@@ -66,13 +66,21 @@ export class DestinasiService {
   }
 
   async remove(id: number) {
-    await this.findOne(id);
-
-    return this.prisma.destinasi.update({
+    await notExistDestinasi(this.prisma, id, 'Destinasi tidak ditemukan');
+    const data = await this.prisma.destinasi.update({
       where: { id },
       data: {
         deletedAt: new Date(),
       },
     });
+
+    return {
+      success: true,
+      message: 'Berhasil menghapus destinasi',
+      metadata: {
+        status: HttpStatus.OK,
+      },
+      data,
+    };
   }
 }
