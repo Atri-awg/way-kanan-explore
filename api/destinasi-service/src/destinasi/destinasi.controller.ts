@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { DestinasiService } from './destinasi.service';
 import { CreateDestinasiDto } from './dto/create-destinasi.dto';
 import { UpdateDestinasiDto } from './dto/update-destinasi.dto';
@@ -18,8 +18,8 @@ export class DestinasiController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.destinasiService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.destinasiService.findOne(id);
   }
 
   @Patch(':id')
