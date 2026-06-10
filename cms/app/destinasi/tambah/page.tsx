@@ -263,6 +263,13 @@ export default function TambahDestinasiPage() {
           >
             Reset
           </button>
+          <button
+            type="button"
+            onClick={() => router.push("/destinasi")}
+            className="rounded-lg bg-red-500 px-5 py-3 text-white hover:bg-red-600"
+          >
+            Batal
+          </button>
         </div>
       </form>
     </div>
