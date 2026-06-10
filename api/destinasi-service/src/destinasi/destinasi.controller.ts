@@ -23,8 +23,11 @@ export class DestinasiController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDestinasiDto: UpdateDestinasiDto) {
-    return this.destinasiService.update(+id, updateDestinasiDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateDestinasiDto,
+  ) {
+    return this.destinasiService.update(id, dto);
   }
 
   @Delete(':id')
