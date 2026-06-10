@@ -43,6 +43,36 @@ export default function DestinasiTable() {
       </div>
     );
   }
+  const handleDelete = async (id: number) => {
+    const confirmDelete = confirm(
+      "Yakin ingin menghapus destinasi ini?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(
+        `http://localhost:3003/api/destinasi/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Gagal menghapus data");
+      }
+
+      alert("Destinasi berhasil dihapus");
+
+      // refresh data
+      setDestinasi((prev) =>
+        prev.filter((item) => item.id !== id)
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Gagal menghapus destinasi");
+    }
+  };
 
   return (
     <table className="w-full">
@@ -101,7 +131,10 @@ export default function DestinasiTable() {
                     <Pencil size={18} />
                   </Link>
 
-                  <button className="text-red-500">
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="text-red-500"
+                  >
                     <Trash2 size={18} />
                   </button>
                 </div>
