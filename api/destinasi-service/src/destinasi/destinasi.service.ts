@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDestinasiDto } from './dto/create-destinasi.dto';
 import { UpdateDestinasiDto } from './dto/update-destinasi.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -21,8 +21,19 @@ export class DestinasiService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} destinasi`;
+  async findOne(id: number) {
+    const destinasi = await this.prisma.destinasi.findFirst({
+      where: {
+        id,
+        deletedAt: null,
+      },
+    });
+
+    if (!destinasi) {
+      throw new NotFoundException('Destinasi tidak ditemukan');
+    }
+
+    return destinasi;
   }
 
   update(id: number, updateDestinasiDto: UpdateDestinasiDto) {
