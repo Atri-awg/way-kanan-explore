@@ -45,7 +45,14 @@ export class DestinasiService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} destinasi`;
+  async remove(id: number) {
+    await this.findOne(id);
+
+    return this.prisma.destinasi.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
   }
 }
