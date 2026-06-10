@@ -2,6 +2,7 @@ import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateDestinasiDto } from './dto/create-destinasi.dto';
 import { UpdateDestinasiDto } from './dto/update-destinasi.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { notExistDestinasi } from 'src/common/utils/not-exist-destinasi.util';
 
 @Injectable()
 export class DestinasiService {
@@ -31,18 +32,20 @@ export class DestinasiService {
   }
 
   async findOne(id: number) {
-    const destinasi = await this.prisma.destinasi.findFirst({
-      where: {
-        id,
-        deletedAt: null,
+    const data = await notExistDestinasi(
+      this.prisma,
+      id,
+      'Destinasi tidak ditemukan',
+    );
+
+    return {
+      success: true,
+      message: 'Berhasil mengambil detail destinasi',
+      metadata: {
+        status: HttpStatus.OK,
       },
-    });
-
-    if (!destinasi) {
-      throw new NotFoundException('Destinasi tidak ditemukan');
-    }
-
-    return destinasi;
+      data,
+    };
   }
 
   async update(id: number, dto: UpdateDestinasiDto) {
