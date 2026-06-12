@@ -2,10 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { KategoriService } from './kategori.service';
 import { CreateKategoriDto } from './dto/create-kategori.dto';
 import { UpdateKategoriDto } from './dto/update-kategori.dto';
-import { InternalGuard } from '../internal.guard';
 
 @Controller('kategori')
-@UseGuards(InternalGuard)
 export class KategoriController {
   constructor(private readonly kategoriService: KategoriService) {}
 
