@@ -1,22 +1,34 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
+import * as express from 'express';
 import 'dotenv/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
 
+  // CORS untuk CMS
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
+
+  // prefix API
   app.setGlobalPrefix('api');
 
+  // body parser (WAJIB)
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  // validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
+      whitelist: false,
       transform: true,
     }),
   );
 
-  // atur hanya ip localhost yang dapat mengakses api
-  await app.listen(process.env.PORT!, 'localhost');
+  await app.listen(process.env.PORT || 3003);
 }
+
 void bootstrap();
