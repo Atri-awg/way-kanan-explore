@@ -36,24 +36,14 @@ class DestinationCard extends StatelessWidget {
               child: Container(
                 height: 160,
                 decoration: BoxDecoration(color: AppColors.greyLight),
-                child: Stack(
-                  children: [
-                    // Placeholder untuk gambar
-                    Center(
-                      child: Icon(
-                        Icons.image,
-                        size: 50,
-                        color: AppColors.textGrey.withValues(alpha: 0.3),
-                      ),
-                    ),
-                    // Jika ingin pakai network image atau asset
-                    // Image.asset(
-                    //   imageUrl,
-                    //   width: double.infinity,
-                    //   height: 160,
-                    //   fit: BoxFit.cover,
-                    // ),
-                  ],
+                child: Image.network(
+                  destination.imageUrl,
+                  width: double.infinity,
+                  height: 160,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) {
+                    return const Center(child: Icon(Icons.broken_image));
+                  },
                 ),
               ),
             ),
