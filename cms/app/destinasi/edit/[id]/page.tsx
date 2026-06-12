@@ -4,13 +4,22 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+const API_DESTINASI = "http://localhost:3003/api/destinasi";
+const API_KATEGORI = "http://localhost:3002/api/kategori";
+
+type Kategori = {
+  id: number;
+  nama: string;
+};
+
 export default function EditDestinasiPage() {
-  
   const params = useParams();
   const router = useRouter();
-  const [saving, setSaving] = useState(false);
 
+  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const [kategori, setKategori] = useState<Kategori[]>([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,42 +30,55 @@ export default function EditDestinasiPage() {
     status: true,
   });
 
+  // 🔥 FETCH DETAIL DESTINASI
   useEffect(() => {
-  const getDestinasi = async () => {
-    try {
-      console.log("ID:", params.id);
+    const getDestinasi = async () => {
+      try {
+        const res = await fetch(`${API_DESTINASI}/${params.id}`);
+        const result = await res.json();
 
-      const res = await fetch(
-        `http://localhost:3003/api/destinasi/${params.id}`
-      );
+        const data = result?.data;
 
-      const result = await res.json();
+        setFormData({
+          name: data?.name ?? "",
+          description: data?.description ?? "",
+          location: data?.location ?? "",
+          categoryId: String(data?.categoryId ?? ""),
+          thumbnail: data?.thumbnail ?? "",
+          status: data?.status ?? true,
+        });
+      } catch (error) {
+        console.error(error);
+        toast.error("Gagal mengambil data destinasi");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      console.log("RESULT:", result);
+    if (params.id) getDestinasi();
+  }, [params.id]);
 
-      const data = result.data;
+  // 🔥 FETCH KATEGORI (SAMA SEPERTI TAMBAH PAGE)
+  useEffect(() => {
+    const getKategori = async () => {
+      try {
+        const res = await fetch(API_KATEGORI);
+        const result = await res.json();
 
-      setFormData({
-        name: data.name ?? "",
-        description: data.description ?? "",
-        location: data.location ?? "",
-        categoryId: data.categoryId ?? "",
-        thumbnail: data.thumbnail ?? "",
-        status: data.status ?? true,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        setKategori(result?.data ?? []);
+      } catch (error) {
+        console.error("Gagal ambil kategori:", error);
+        setKategori([]);
+      }
+    };
 
-  getDestinasi();
-}, [params.id]);
+    getKategori();
+  }, []);
 
+  // 🔥 HANDLE INPUT
   const handleChange = (
     e: React.ChangeEvent<
-      HTMLInputElement |
-      HTMLTextAreaElement |
-      HTMLSelectElement
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
     const { name, value } = e.target;
@@ -67,38 +89,40 @@ export default function EditDestinasiPage() {
     }));
   };
 
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  // 🔥 SUBMIT UPDATE
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const res = await fetch(
-        `http://localhost:3003/api/destinasi/${params.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      setSaving(true);
+
+      const res = await fetch(`${API_DESTINASI}/${params.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
 
       if (!res.ok) {
-        throw new Error(
-          "Gagal mengubah destinasi"
-        );
+        throw new Error(result.message || "Gagal update destinasi");
       }
 
       toast.success("Destinasi berhasil diperbarui");
-
       router.push("/destinasi");
     } catch (error) {
       console.error(error);
-      alert("Gagal mengubah destinasi");
+      toast.error("Gagal mengubah destinasi");
+    } finally {
+      setSaving(false);
     }
   };
+
+  if (loading) {
+    return <div className="py-10 text-center">Loading...</div>;
+  }
 
   return (
     <div className="rounded-xl bg-white p-6 shadow">
@@ -110,11 +134,9 @@ export default function EditDestinasiPage() {
         Edit destinasi wisata
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-5"
-      >
-        {/* Nama Destinasi */}
+      <form onSubmit={handleSubmit} className="space-y-5">
+
+        {/* Nama */}
         <div>
           <label className="mb-2 block font-medium">
             Nama Destinasi
@@ -125,13 +147,12 @@ export default function EditDestinasiPage() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Masukkan nama destinasi"
             className="w-full rounded-lg border p-3"
             required
           />
         </div>
 
-        {/* Kategori */}
+        {/* KATEGORI (FIXED - NO HARDCODE) */}
         <div>
           <label className="mb-2 block font-medium">
             Kategori
@@ -144,25 +165,13 @@ export default function EditDestinasiPage() {
             className="w-full rounded-lg border p-3"
             required
           >
-            <option value="">
-              Pilih Kategori
-            </option>
+            <option value="">Pilih Kategori</option>
 
-            <option value="1">
-              Wisata Alam
-            </option>
-
-            <option value="2">
-              Pantai
-            </option>
-
-            <option value="3">
-              Budaya
-            </option>
-
-            <option value="4">
-              Sejarah
-            </option>
+            {kategori.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.nama}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -177,7 +186,6 @@ export default function EditDestinasiPage() {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            placeholder="Contoh: Lampung Timur"
             className="w-full rounded-lg border p-3"
             required
           />
@@ -194,7 +202,6 @@ export default function EditDestinasiPage() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            placeholder="Masukkan deskripsi destinasi"
             className="w-full rounded-lg border p-3"
             required
           />
@@ -211,7 +218,6 @@ export default function EditDestinasiPage() {
             name="thumbnail"
             value={formData.thumbnail}
             onChange={handleChange}
-            placeholder="https://example.com/image.jpg"
             className="w-full rounded-lg border p-3"
           />
         </div>
@@ -227,32 +233,24 @@ export default function EditDestinasiPage() {
             onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                status:
-                  e.target.value === "true",
+                status: e.target.value === "true",
               }))
             }
             className="w-full rounded-lg border p-3"
           >
-            <option value="true">
-              Published
-            </option>
-
-            <option value="false">
-              Draft
-            </option>
+            <option value="true">Published</option>
+            <option value="false">Draft</option>
           </select>
         </div>
 
-        {/* Tombol */}
+        {/* BUTTON */}
         <div className="flex gap-3">
           <button
             type="submit"
             disabled={saving}
             className="rounded-lg bg-green-600 px-5 py-3 text-white hover:bg-green-700 disabled:opacity-50"
           >
-            {saving
-              ? "Menyimpan..."
-              : "Update Destinasi"}
+            {saving ? "Menyimpan..." : "Update Destinasi"}
           </button>
 
           <button
@@ -263,6 +261,7 @@ export default function EditDestinasiPage() {
             Batal
           </button>
         </div>
+
       </form>
     </div>
   );
