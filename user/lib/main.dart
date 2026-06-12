@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:user/features/home/screens/home_page.dart';
-import 'package:user/features/travel_list/travel_list_page.dart';
-import 'package:user/features/destination/screens/destination_detail_page.dart';
+// import 'package:user/features/home/screens/home_page.dart';
+// import 'package:user/features/travel_list/travel_list_page.dart';
+// import 'package:user/features/destination/screens/destination_detail_page.dart';
 import 'package:user/features/destination/screens/destination_list_page.dart';
+
 
 void main() {
   runApp(const MyApp());
