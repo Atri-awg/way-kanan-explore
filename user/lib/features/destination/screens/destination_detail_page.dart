@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import '../models/destination_model.dart';
 
 class DestinationDetailPage extends StatelessWidget {
-   final Destination destination;
+  final Destination destination;
 
   const DestinationDetailPage({
     super.key,
     required this.destination,
   });
-
 
   @override
   Widget build(BuildContext context) {
