@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import '../models/destination_model.dart';
+import 'package:flutter/services.dart';
 
 class DestinationService {
   // Simulasi penundaan jaringan agar terasa seperti pemanggilan API sungguhan
@@ -10,11 +11,13 @@ class DestinationService {
   Future<List<Destination>> getDestinations() async {
     try {
       await Future.delayed(_simulatedLatency);
-      
-      // Parse JSON string ke List of dynamic
-      final List<dynamic> jsonData = jsonDecode('assets/data/destinations.json');
-      
-      // Mapping ke List<Destination> menggunakan model yang sudah dibuat
+
+      final String jsonString = await rootBundle.loadString(
+        'assets/data/destinations.json',
+      );
+
+      final List<dynamic> jsonData = jsonDecode(jsonString);
+
       return jsonData.map((json) => Destination.fromJson(json)).toList();
     } catch (e) {
       debugPrint('Error fetching destinations: $e');
@@ -26,16 +29,19 @@ class DestinationService {
   Future<Destination?> getDestinationById(String id) async {
     try {
       await Future.delayed(_simulatedLatency);
-      
-      final List<dynamic> jsonData = jsonDecode('assets/data/destinations.json');
-      
-      // Mencari data yang cocok dengan ID
-      final targetJson = jsonData.firstWhere(
-        (element) => element['id'] == id,
-        orElse: () => null,
+
+      final String jsonString = await rootBundle.loadString(
+        'assets/data/destinations.json',
       );
 
-      if (targetJson == null) return null;
+      final List<dynamic> jsonData = jsonDecode(jsonString);
+
+      final targetJson = jsonData.cast<Map<String, dynamic>>().firstWhere(
+        (element) => element['id'] == id,
+        orElse: () => {},
+      );
+
+      if (targetJson.isEmpty) return null;
 
       return Destination.fromJson(targetJson);
     } catch (e) {
@@ -43,5 +49,4 @@ class DestinationService {
       throw Exception('Gagal mengambil detail destinasi');
     }
   }
-
 }
