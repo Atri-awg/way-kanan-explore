@@ -1,6 +1,7 @@
 class Destination {
   final String id;
   final String name;
+  final String imageUrl;
   final Location location;
   final double rating;
   final int reviewsCount;
@@ -15,6 +16,7 @@ class Destination {
   Destination({
     required this.id,
     required this.name,
+    required this.imageUrl,
     required this.location,
     required this.rating,
     required this.reviewsCount,
@@ -31,6 +33,7 @@ class Destination {
     return Destination(
       id: json['id'] ?? '',
       name: json['name'] ?? '',
+      imageUrl: json['imageUrl'] ?? '',
       location: Location.fromJson(json['location'] ?? {}),
       rating: (json['rating'] ?? 0).toDouble(),
       reviewsCount: json['reviewsCount'] ?? 0,
@@ -54,6 +57,7 @@ class Destination {
     return {
       'id': id,
       'name': name,
+      'imageUrl': imageUrl,
       'location': location.toJson(),
       'rating': rating,
       'reviewsCount': reviewsCount,
