@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -8,7 +8,25 @@ export default function TambahDestinasiPage() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-  const [kategori, setKategori] = useState([]);
+  const [kategori, setKategori] = useState<any[]>([]);
+
+  useEffect(() => {
+    const getKategori = async () => {
+      try {
+        const res = await fetch("http://localhost:3002/api/kategori");
+        const result = await res.json();
+
+        const data = result?.data ?? result;
+
+        setKategori(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error(error);
+        setKategori([]); // fallback aman
+      }
+    };
+
+    getKategori();
+  }, []);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -106,6 +124,21 @@ export default function TambahDestinasiPage() {
     });
   };
 
+  useEffect(() => {
+  const getKategori = async () => {
+    try {
+      const res = await fetch("http://localhost:3003/api/kategori");
+      const result = await res.json();
+
+      setKategori(Array.isArray(result) ? result : result.data);
+    } catch (error) {
+      console.error("Gagal ambil kategori:", error);
+    }
+  };
+
+  getKategori();
+}, []);
+
   return (
     <div className="rounded-xl bg-white p-6 shadow">
       <h1 className="mb-2 text-3xl font-bold">
@@ -150,25 +183,13 @@ export default function TambahDestinasiPage() {
             className="w-full rounded-lg border p-3"
             required
           >
-            <option value="">
-              Pilih Kategori
-            </option>
+            <option value="">Pilih Kategori</option>
 
-            <option value="1">
-              Wisata Alam
-            </option>
-
-            <option value="2">
-              Pantai
-            </option>
-
-            <option value="3">
-              Budaya
-            </option>
-
-            <option value="4">
-              Sejarah
-            </option>
+            {kategori.map((item: any) => (
+              <option key={item.id} value={item.id}>
+                {item.nama}
+              </option>
+            ))}
           </select>
         </div>
 
