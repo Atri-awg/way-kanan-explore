@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
-import '../models/destination_model.dart';
+import 'package:user/features/destination/models/destination_model.dart';
 import 'package:flutter/services.dart';
 
 class DestinationService {
