@@ -12,26 +12,32 @@ class DestinationListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Destinations'),
-      ),
+      appBar: AppBar(title: const Text('Destinations')),
       body: FutureBuilder<List<Destination>>(
         future: service.getDestinations(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState ==
-              ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+          print("STATE = ${snapshot.connectionState}");
+
+          if (snapshot.hasData) {
+            print("DATA = ${snapshot.data!.length}");
           }
 
           if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString()),
-            );
+            print("ERROR = ${snapshot.error}");
           }
 
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          }
+          
+
           final destinations = snapshot.data ?? [];
+          print(destinations.first.name);
+          print(destinations.first.toJson());
 
           return ListView.builder(
             itemCount: destinations.length,
@@ -44,9 +50,8 @@ class DestinationListPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => DestinationDetailPage(
-                        destination: destination,
-                      ),
+                      builder: (_) =>
+                          DestinationDetailPage(destination: destination),
                     ),
                   );
                 },
@@ -57,5 +62,4 @@ class DestinationListPage extends StatelessWidget {
       ),
     );
   }
-  
 }
