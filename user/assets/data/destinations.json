@@ -2,6 +2,7 @@
   {
     "id": "dest-001",
     "name": "Air Terjun Putri Malu",
+    "imageUrl": "https://storage.waykananexplore.com/images/putri_malu_1.jpg",
     "location": {
       "address": "Juku Batu, Banjit, Way Kanan, Lampung",
       "latitude": -4.6851,
@@ -30,6 +31,7 @@
   {
     "id": "dest-002",
     "name": "Curup Gangsa",
+    "imageUrl": "https://storage.waykananexplore.com/images/curup_gangsa_1.jpg",
     "location": {
       "address": "Tanjung Raya, Way Tuba, Way Kanan, Lampung",
       "latitude": -4.5123,
@@ -58,6 +60,7 @@
   {
     "id": "dest-003",
     "name": "Kampung Wisata Gedung Batin",
+    "imageUrl": "https://storage.waykananexplore.com/images/gedung_batin_1.jpg",
     "location": {
       "address": "Gedung Batin, Blambangan Umpu, Way Kanan, Lampung",
       "latitude": -4.4890,
@@ -84,6 +87,7 @@
   {
     "id": "dest-004",
     "name": "Arung Jeram Sungai Way Besai",
+    "imageUrl": "https://storage.waykananexplore.com/images/sungai_way_besai.jpg",
     "location": {
       "address": "Banjit, Way Kanan, Lampung",
       "latitude": -4.6600,
@@ -111,6 +115,7 @@
   {
     "id": "dest-005",
     "name": "Air Terjun Tirta Haji",
+    "imageUrl": "https://storage.waykananexplore.com/images/air_terjun_tirta_haji.jpg",
     "location": {
       "address": "Way Kanan, Lampung, 34764",
       "latitude": -4.4350,
@@ -138,6 +143,7 @@
   {
     "id": "dest-006",
     "name": "Goa Kelelawar",
+    "imageUrl": "https://storage.waykananexplore.com/images/goa_kelelawar.jpg",
     "location": {
       "address": "Blambangan Umpu, Way Kanan, Lampung",
       "latitude": -4.4500,
@@ -165,6 +171,7 @@
   {
     "id": "dest-007",
     "name": "Bukit Barisan Selatan (Area Way Kanan)",
+    "imageUrl": "https://storage.waykananexplore.com/images/bukit_barisan.jpg",
     "location": {
       "address": "TNBBS Way Kanan, Lampung",
       "latitude": -4.7200,
@@ -192,6 +199,7 @@
   {
     "id": "dest-008",
     "name": "Curup Kereta",
+    "imageUrl": "https://storage.waykananexplore.com/images/curup_kereta_1.jpg",
     "location": {
       "address": "Kasui, Way Kanan, Lampung",
       "latitude": -4.5800,
@@ -219,6 +227,7 @@
   {
     "id": "dest-009",
     "name": "Sumber Air Panas Juku Batu",
+    "imageUrl": "https://storage.waykananexplore.com/images/hot_spring_juku_batu.jpg",
     "location": {
       "address": "Juku Batu, Banjit, Way Kanan, Lampung",
       "latitude": -4.6855,
@@ -245,6 +254,7 @@
   {
     "id": "dest-010",
     "name": "Bendungan Way Umpu",
+    "imageUrl": "https://storage.waykananexplore.com/images/bendungan_way_umpu.jpg",
     "location": {
       "address": "Way Umpu, Way Kanan, Lampung",
       "latitude": -4.4750,
@@ -272,6 +282,7 @@
   {
     "id": "dest-011",
     "name": "Curup Jepun",
+    "imageUrl": "https://storage.waykananexplore.com/images/curup_jepun.jpg",
     "location": {
       "address": "Negeri Agung, Way Kanan, Lampung",
       "latitude": -4.5000,
@@ -299,6 +310,7 @@
   {
     "id": "dest-012",
     "name": "Puncak Bukit Punggur",
+    "imageUrl": "https://storage.waykananexplore.com/images/bukit_punggur.jpg",
     "location": {
       "address": "Kasui, Way Kanan, Lampung",
       "latitude": -4.6200,
@@ -326,6 +338,7 @@
   {
     "id": "dest-013",
     "name": "Taman Wisata Lembah Hijau Way Kanan",
+    "imageUrl": "https://storage.waykananexplore.com/images/lembah_hijau_wk.jpg",
     "location": {
       "address": "Baradatu, Way Kanan, Lampung",
       "latitude": -4.6400,
@@ -352,6 +365,7 @@
   {
     "id": "dest-014",
     "name": "Air Terjun Kincir",
+    "imageUrl": "https://storage.waykananexplore.com/images/curup_kincir.jpg",
     "location": {
       "address": "Rebang Tangkas, Way Kanan, Lampung",
       "latitude": -4.5600,
@@ -379,6 +393,7 @@
   {
     "id": "dest-015",
     "name": "Curup Tayan",
+    "imageUrl": "https://storage.waykananexplore.com/images/curup_tayan.jpg",
     "location": {
       "address": "Gunung Labuhan, Way Kanan, Lampung",
       "latitude": -4.6800,
@@ -406,6 +421,7 @@
   {
     "id": "dest-016",
     "name": "Air Terjun Cangkah Kidau",
+    "imageUrl": "https://storage.waykananexplore.com/images/cangkah_kidau.jpg",
     "location": {
       "address": "Banjit, Way Kanan, Lampung",
       "latitude": -4.6700,
@@ -433,6 +449,7 @@
   {
     "id": "dest-017",
     "name": "Hutan Kota Blambangan Umpu",
+    "imageUrl": "https://storage.waykananexplore.com/images/hutan_kota_bu.jpg",
     "location": {
       "address": "Blambangan Umpu, Way Kanan, Lampung",
       "latitude": -4.4550,
@@ -460,6 +477,7 @@
   {
     "id": "dest-018",
     "name": "Wisata Alam Margo Mulyo",
+    "imageUrl": "https://storage.waykananexplore.com/images/margo_mulyo.jpg",
     "location": {
       "address": "Tumijajar, Way Kanan, Lampung",
       "latitude": -4.5300,
@@ -487,6 +505,7 @@
   {
     "id": "dest-019",
     "name": "Danau Lebar Way Kanan",
+    "imageUrl": "https://storage.waykananexplore.com/images/danau_lebar.jpg",
     "location": {
       "address": "Bumi Agung, Way Kanan, Lampung",
       "latitude": -4.5900,
@@ -513,6 +532,7 @@
   {
     "id": "dest-020",
     "name": "Curup Kembar",
+    "imageUrl": "https://storage.waykananexplore.com/images/curup_kembar.jpg",
     "location": {
       "address": "Banjit, Way Kanan, Lampung",
       "latitude": -4.6880,
