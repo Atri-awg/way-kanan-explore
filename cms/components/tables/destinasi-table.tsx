@@ -5,30 +5,38 @@ import Link from "next/link";
 import { Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
+const API_DESTINASI = "http://localhost:3003/api/destinasi";
+const API_KATEGORI = "http://localhost:3002/api/kategori";
+
 interface Destinasi {
   id: number;
   name: string;
   location: string;
-  categoryId: string;
+  categoryId: number;
   status: boolean;
+}
+
+interface Kategori {
+  id: number;
+  nama: string;
 }
 
 export default function DestinasiTable() {
   const [destinasi, setDestinasi] = useState<Destinasi[]>([]);
+  const [kategori, setKategori] = useState<Kategori[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 FETCH DESTINASI
   useEffect(() => {
     const getDestinasi = async () => {
       try {
-        const res = await fetch(
-          "http://localhost:3003/api/destinasi"
-        );
-
+        const res = await fetch(API_DESTINASI);
         const result = await res.json();
 
-        setDestinasi(result);
+        setDestinasi(result?.data ?? result);
       } catch (error) {
-        console.error("Gagal mengambil data:", error);
+        console.error("Gagal mengambil destinasi:", error);
+        setDestinasi([]);
       } finally {
         setLoading(false);
       }
@@ -37,41 +45,52 @@ export default function DestinasiTable() {
     getDestinasi();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="py-6 text-center">
-        Loading...
-      </div>
-    );
-  }
-  const handleDelete = async (id: number) => {
-    const confirmDelete = confirm(
-      "Yakin ingin menghapus destinasi ini?"
+  // 🔥 FETCH KATEGORI
+  useEffect(() => {
+    const getKategori = async () => {
+      try {
+        const res = await fetch(API_KATEGORI);
+        const result = await res.json();
+
+        setKategori(result?.data ?? []);
+      } catch (error) {
+        console.error("Gagal ambil kategori:", error);
+        setKategori([]);
+      }
+    };
+
+    getKategori();
+  }, []);
+
+  const getKategoriName = (id: number | string) => {
+    const found = kategori.find(
+      (k) => String(k.id) === String(id)
     );
 
+    return found ? found.nama : "-";
+  };
+  const handleDelete = async (id: number) => {
+    const confirmDelete = confirm("Yakin ingin menghapus destinasi ini?");
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(
-        `http://localhost:3003/api/destinasi/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(`${API_DESTINASI}/${id}`, {
+        method: "DELETE",
+      });
 
       if (!res.ok) {
         toast.error("Gagal menghapus destinasi");
+        return;
       }
 
       toast.success("Destinasi berhasil dihapus");
 
-      // refresh data
       setDestinasi((prev) =>
         prev.filter((item) => item.id !== id)
       );
     } catch (error) {
       console.error(error);
-      alert("Gagal menghapus destinasi");
+      toast.error("Gagal menghapus destinasi");
     }
   };
 
@@ -90,22 +109,17 @@ export default function DestinasiTable() {
       <tbody>
         {destinasi.length === 0 ? (
           <tr>
-            <td
-              colSpan={5}
-              className="py-6 text-center text-gray-500"
-            >
+            <td colSpan={5} className="py-6 text-center text-gray-500">
               Belum ada data destinasi
             </td>
           </tr>
         ) : (
           destinasi.map((item) => (
-            <tr
-              key={item.id}
-              className="border-b"
-            >
+            <tr key={item.id} className="border-b">
               <td className="py-4">{item.name}</td>
 
-              <td>{item.categoryId}</td>
+              {/* 🔥 INI FIX UTAMA */}
+              <td>{getKategoriName(item.categoryId)}</td>
 
               <td>{item.location}</td>
 
@@ -117,9 +131,7 @@ export default function DestinasiTable() {
                       : "bg-yellow-100 text-yellow-700"
                   }`}
                 >
-                  {item.status
-                    ? "Published"
-                    : "Draft"}
+                  {item.status ? "Published" : "Draft"}
                 </span>
               </td>
 

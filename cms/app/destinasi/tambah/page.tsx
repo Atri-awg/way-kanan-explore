@@ -4,29 +4,19 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+const API_KATEGORI = "http://localhost:3002/api/kategori";
+const API_DESTINASI = "http://localhost:3003/api/destinasi";
+
+type Kategori = {
+  id: number;
+  nama: string;
+};
+
 export default function TambahDestinasiPage() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-  const [kategori, setKategori] = useState<any[]>([]);
-
-  useEffect(() => {
-    const getKategori = async () => {
-      try {
-        const res = await fetch("http://localhost:3002/api/kategori");
-        const result = await res.json();
-
-        const data = result?.data ?? result;
-
-        setKategori(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error(error);
-        setKategori([]); // fallback aman
-      }
-    };
-
-    getKategori();
-  }, []);
+  const [kategori, setKategori] = useState<Kategori[]>([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,19 +27,29 @@ export default function TambahDestinasiPage() {
     status: true,
   });
 
-  const generateSlug = (text: string) => {
-    return text
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]+/g, "");
-  };
+  // 🔥 FETCH KATEGORI (ONLY ONCE)
+  useEffect(() => {
+    const fetchKategori = async () => {
+      try {
+        const res = await fetch(API_KATEGORI);
+        const result = await res.json();
 
+        console.log("Kategori API:", result);
+
+        setKategori(result?.data ?? []);
+      } catch (error) {
+        console.error("Gagal ambil kategori:", error);
+        setKategori([]);
+      }
+    };
+
+    fetchKategori();
+  }, []);
+
+  // 🔥 handle input
   const handleChange = (
     e: React.ChangeEvent<
-      HTMLInputElement |
-      HTMLTextAreaElement |
-      HTMLSelectElement
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
     const { name, value } = e.target;
@@ -60,9 +60,16 @@ export default function TambahDestinasiPage() {
     }));
   };
 
- const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  // 🔥 slug generator
+  const generateSlug = (text: string) =>
+    text
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]+/g, "");
+
+  // 🔥 submit
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
@@ -73,46 +80,31 @@ export default function TambahDestinasiPage() {
         slug: generateSlug(formData.name),
       };
 
-      console.log("Payload:", payload);
-
-      const res = await fetch(
-        "http://localhost:3003/api/destinasi",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(API_DESTINASI, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const result = await res.json();
 
-      console.log("Response:", result);
-
       if (!res.ok) {
-        throw new Error(
-          result.message ||
-            "Gagal menambahkan destinasi"
-        );
+        throw new Error(result.message || "Gagal menambahkan destinasi");
       }
 
-      toast.success(
-        "Destinasi berhasil ditambahkan!"
-      );
-
+      toast.success("Destinasi berhasil ditambahkan!");
       router.push("/destinasi");
     } catch (error) {
       console.error(error);
-
-      toast.error(
-        "Gagal menyimpan destinasi"
-      );
+      toast.error("Gagal menyimpan destinasi");
     } finally {
       setLoading(false);
     }
   };
 
+  // 🔥 reset form
   const handleReset = () => {
     setFormData({
       name: "",
@@ -124,21 +116,6 @@ export default function TambahDestinasiPage() {
     });
   };
 
-  useEffect(() => {
-  const getKategori = async () => {
-    try {
-      const res = await fetch("http://localhost:3003/api/kategori");
-      const result = await res.json();
-
-      setKategori(Array.isArray(result) ? result : result.data);
-    } catch (error) {
-      console.error("Gagal ambil kategori:", error);
-    }
-  };
-
-  getKategori();
-}, []);
-
   return (
     <div className="rounded-xl bg-white p-6 shadow">
       <h1 className="mb-2 text-3xl font-bold">
@@ -149,11 +126,9 @@ export default function TambahDestinasiPage() {
         Tambahkan destinasi wisata baru
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-5"
-      >
-        {/* Nama Destinasi */}
+      <form onSubmit={handleSubmit} className="space-y-5">
+
+        {/* Nama */}
         <div>
           <label className="mb-2 block font-medium">
             Nama Destinasi
@@ -164,7 +139,6 @@ export default function TambahDestinasiPage() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Masukkan nama destinasi"
             className="w-full rounded-lg border p-3"
             required
           />
@@ -185,11 +159,15 @@ export default function TambahDestinasiPage() {
           >
             <option value="">Pilih Kategori</option>
 
-            {kategori.map((item: any) => (
-              <option key={item.id} value={item.id}>
-                {item.nama}
-              </option>
-            ))}
+            {kategori.length > 0 ? (
+              kategori.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.nama}
+                </option>
+              ))
+            ) : (
+              <option disabled>Loading kategori...</option>
+            )}
           </select>
         </div>
 
@@ -204,7 +182,6 @@ export default function TambahDestinasiPage() {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            placeholder="Contoh: Lampung Timur"
             className="w-full rounded-lg border p-3"
             required
           />
@@ -217,11 +194,10 @@ export default function TambahDestinasiPage() {
           </label>
 
           <textarea
-            rows={5}
             name="description"
             value={formData.description}
             onChange={handleChange}
-            placeholder="Masukkan deskripsi destinasi"
+            rows={5}
             className="w-full rounded-lg border p-3"
             required
           />
@@ -230,7 +206,7 @@ export default function TambahDestinasiPage() {
         {/* Thumbnail */}
         <div>
           <label className="mb-2 block font-medium">
-            URL Thumbnail
+            Thumbnail
           </label>
 
           <input
@@ -238,7 +214,6 @@ export default function TambahDestinasiPage() {
             name="thumbnail"
             value={formData.thumbnail}
             onChange={handleChange}
-            placeholder="https://example.com/image.jpg"
             className="w-full rounded-lg border p-3"
           />
         </div>
@@ -254,45 +229,38 @@ export default function TambahDestinasiPage() {
             onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                status:
-                  e.target.value === "true",
+                status: e.target.value === "true",
               }))
             }
             className="w-full rounded-lg border p-3"
           >
-            <option value="true">
-              Published
-            </option>
-
-            <option value="false">
-              Draft
-            </option>
+            <option value="true">Published</option>
+            <option value="false">Draft</option>
           </select>
         </div>
 
-        {/* Tombol */}
+        {/* BUTTON */}
         <div className="flex gap-3">
           <button
             type="submit"
             disabled={loading}
             className="rounded-lg bg-green-600 px-5 py-3 text-white hover:bg-green-700 disabled:opacity-50"
           >
-            {loading
-              ? "Menyimpan..."
-              : "Simpan Destinasi"}
+            {loading ? "Menyimpan..." : "Simpan"}
           </button>
 
           <button
             type="button"
             onClick={handleReset}
-            className="rounded-lg bg-gray-200 px-5 py-3 text-gray-700 hover:bg-gray-300"
+            className="rounded-lg bg-gray-200 px-5 py-3"
           >
             Reset
           </button>
+
           <button
             type="button"
             onClick={() => router.push("/destinasi")}
-            className="rounded-lg bg-red-500 px-5 py-3 text-white hover:bg-red-600"
+            className="rounded-lg bg-red-500 px-5 py-3 text-white"
           >
             Batal
           </button>
