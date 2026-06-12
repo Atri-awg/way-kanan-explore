@@ -8,6 +8,7 @@ export default function TambahDestinasiPage() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+  const [kategori, setKategori] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
