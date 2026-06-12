@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:user/core/constants/app_colors.dart';
+import 'package:user/features/destination/models/destination_model.dart';
 
 class DestinationCard extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String location;
+  final Destination destination;
   final VoidCallback? onTap;
 
-  const DestinationCard({
-    super.key,
-    required this.imageUrl,
-    required this.title,
-    required this.location,
-    this.onTap,
-  });
+  const DestinationCard({super.key, required this.destination, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +30,12 @@ class DestinationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(12),
+              ),
               child: Container(
                 height: 160,
-                decoration: BoxDecoration(
-                  color: AppColors.greyLight,
-                ),
+                decoration: BoxDecoration(color: AppColors.greyLight),
                 child: Stack(
                   children: [
                     // Placeholder untuk gambar
@@ -70,7 +63,7 @@ class DestinationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    destination.name,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -90,7 +83,7 @@ class DestinationCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          location,
+                          destination.location.address,
                           style: TextStyle(
                             fontSize: 13,
                             color: AppColors.textGrey,
