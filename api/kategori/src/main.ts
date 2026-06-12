@@ -3,6 +3,10 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3001);
+  // tambahkan prefix "api"
+  app.setGlobalPrefix('api');
+
+  // atur hanya ip localhost yang dapat mengakses api
+  await app.listen(process.env.PORT!, 'localhost');
 }
-bootstrap();
+void bootstrap();
