@@ -4,10 +4,7 @@ import '../models/destination_model.dart';
 class DestinationDetailPage extends StatelessWidget {
   final Destination destination;
 
-  const DestinationDetailPage({
-    super.key,
-    required this.destination,
-  });
+  const DestinationDetailPage({super.key, required this.destination});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +37,8 @@ class DestinationDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // --- 1. Header & Title Section ---
-              const Text(
-                'Air Terjun Tirta Haji',
+              Text(
+                destination.name,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -53,16 +50,13 @@ class DestinationDetailPage extends StatelessWidget {
                 children: [
                   const Icon(Icons.star, color: Colors.amber, size: 20),
                   const SizedBox(width: 4),
-                  const Text(
-                    '4.8',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                  Text(
+                    destination.rating.toStringAsFixed(1),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   const SizedBox(width: 6),
-                  const Text(
-                    '(124 reviews) • Way Kanan, Lampung',
+                  Text(
+                    destination.reviewsCount.toStringAsFixed(1),
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   const Spacer(),
@@ -76,7 +70,10 @@ class DestinationDetailPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: const Text('Get trip', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: const Text(
+                      'Get trip',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -143,7 +140,9 @@ class DestinationDetailPage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0D1B2A), // Warna biru gelap seperti di inspirasi
+                  color: const Color(
+                    0xFF0D1B2A,
+                  ), // Warna biru gelap seperti di inspirasi
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -168,8 +167,8 @@ class DestinationDetailPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Text(
-                      'Air Terjun Tirta Haji menyuguhkan pesona alam yang masih asri dan alami. Dengan dikelilingi hutan hijau yang rimbun, tempat ini menjadi destinasi sempurna untuk melarikan diri dari hiruk-pikuk perkotaan.',
+                    Text(
+                      destination.description,
                       style: TextStyle(
                         color: Colors.white70,
                         height: 1.5,
@@ -184,16 +183,21 @@ class DestinationDetailPage extends StatelessWidget {
                           backgroundColor: Colors.white24,
                           child: Padding(
                             padding: const EdgeInsets.all(4.0),
-                            child: Image.asset('assets/images/WayKananExploreLogo.png'),
+                            child: Image.asset(
+                              'assets/images/WayKananExploreLogo.png',
+                            ),
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const Text(
-                          'by Admin Tim',
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                        Text(
+                          destination.ourTake.author,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -202,7 +206,11 @@ class DestinationDetailPage extends StatelessWidget {
               // --- 4. Details & Map Section ---
               const Text(
                 'Details',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
               const SizedBox(height: 16),
               Row(
@@ -212,10 +220,19 @@ class DestinationDetailPage extends StatelessWidget {
                     flex: 3,
                     child: Column(
                       children: [
-                        _buildDetailItem(Icons.location_on_outlined, 'Way Kanan, Lampung, 34764'),
-                        _buildDetailItem(Icons.access_time, 'Buka • 08:00 AM - 17:00 PM'),
-                        _buildDetailItem(Icons.public, 'waykananexplore.com'),
-                        _buildDetailItem(Icons.phone_outlined, '+62 811 2233 4455'),
+                        _buildDetailItem(
+                          Icons.location_on_outlined,
+                          destination.location.address,
+                        ),
+                        _buildDetailItem(
+                          Icons.access_time,
+                          destination.operationalHours,
+                        ),
+                        _buildDetailItem(Icons.public, destination.website),
+                        _buildDetailItem(
+                          Icons.phone_outlined,
+                          destination.phone,
+                        ),
                       ],
                     ),
                   ),
@@ -231,7 +248,11 @@ class DestinationDetailPage extends StatelessWidget {
                         child: const Stack(
                           alignment: Alignment.center,
                           children: [
-                            Icon(Icons.map_outlined, size: 48, color: Colors.grey),
+                            Icon(
+                              Icons.map_outlined,
+                              size: 48,
+                              color: Colors.grey,
+                            ),
                             Positioned(
                               bottom: 8,
                               child: Text(
@@ -242,7 +263,7 @@ class DestinationDetailPage extends StatelessWidget {
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -253,21 +274,33 @@ class DestinationDetailPage extends StatelessWidget {
               const SizedBox(height: 28),
 
               // --- 5. Description Section ---
-              const Text(
-                'Eksplorasi Keindahan Alam Way Kanan',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
+              Text(
+                destination.description,
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Nikmati sensasi petualangan menyusuri jalur trekking yang menantang sebelum disambut oleh kesegaran air terjun. Tempat ini juga berdekatan dengan Sungai Way Besai yang kerap digunakan untuk aktivitas arung jeram.',
-                style: TextStyle(color: Colors.black87, height: 1.6, fontSize: 15),
+              Text(
+                destination.description,
+                style: TextStyle(
+                  color: Colors.black87,
+                  height: 1.6,
+                  fontSize: 15,
+                ),
               ),
               const SizedBox(height: 28),
 
               // --- 6. Destination Details Tags ---
               const Text(
                 'Destination Details',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
               const SizedBox(height: 16),
               Wrap(
@@ -285,7 +318,11 @@ class DestinationDetailPage extends StatelessWidget {
               // --- 7. Reviews Section ---
               const Text(
                 'Reviews',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
               const SizedBox(height: 16),
               _buildReviewItem(
@@ -320,7 +357,11 @@ class DestinationDetailPage extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(color: Colors.black87, fontSize: 14, height: 1.4),
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 14,
+                height: 1.4,
+              ),
             ),
           ),
         ],
@@ -344,7 +385,10 @@ class DestinationDetailPage extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             text,
-            style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
+            style: const TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
@@ -365,7 +409,11 @@ class DestinationDetailPage extends StatelessWidget {
                 backgroundColor: Colors.blue.shade100,
                 child: Text(
                   name[0],
-                  style: const TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 18),
+                  style: const TextStyle(
+                    color: Colors.blueAccent,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -373,25 +421,44 @@ class DestinationDetailPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
                     const SizedBox(height: 2),
-                    Text(time, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                    Text(
+                      time,
+                      style: TextStyle(
+                        color: Colors.grey.shade600,
+                        fontSize: 12,
+                      ),
+                    ),
                   ],
                 ),
               ),
               Row(
-                children: List.generate(5, (index) => Icon(
-                  index < rating ? Icons.star : Icons.star_border,
-                  color: index < rating ? Colors.amber : Colors.grey.shade300,
-                  size: 16,
-                )),
-              )
+                children: List.generate(
+                  5,
+                  (index) => Icon(
+                    index < rating ? Icons.star : Icons.star_border,
+                    color: index < rating ? Colors.amber : Colors.grey.shade300,
+                    size: 16,
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
             review,
-            style: const TextStyle(color: Colors.black87, height: 1.5, fontSize: 14),
+            style: const TextStyle(
+              color: Colors.black87,
+              height: 1.5,
+              fontSize: 14,
+            ),
           ),
           const SizedBox(height: 16),
           Divider(height: 1, color: Colors.grey.shade200),
