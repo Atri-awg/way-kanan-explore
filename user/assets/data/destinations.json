@@ -1,0 +1,540 @@
+[
+  {
+    "id": "dest-001",
+    "name": "Air Terjun Putri Malu",
+    "location": {
+      "address": "Juku Batu, Banjit, Way Kanan, Lampung",
+      "latitude": -4.6851,
+      "longitude": 104.3645
+    },
+    "rating": 4.9,
+    "reviewsCount": 350,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4455",
+    "description": "Air Terjun Putri Malu adalah primadona wisata Way Kanan. Bentuk air terjunnya melengkung menyerupai punggung manusia yang sedang mandi, dengan ketinggian sekitar 80 meter.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Akses jalannya cukup menantang, tapi pesona alam dan kesegaran air yang jatuh dari ketinggian 80 meter sangat sepadan dengan perjalanannya."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-001a", "imageUrl": "https://storage.waykananexplore.com/images/putri_malu_1.jpg", "isPrimary": true },
+      { "id": "gal-001b", "imageUrl": "https://storage.waykananexplore.com/images/putri_malu_2.jpg", "isPrimary": false }
+    ]
+  },
+  {
+    "id": "dest-002",
+    "name": "Curup Gangsa",
+    "location": {
+      "address": "Tanjung Raya, Way Tuba, Way Kanan, Lampung",
+      "latitude": -4.5123,
+      "longitude": 104.4211
+    },
+    "rating": 4.8,
+    "reviewsCount": 210,
+    "operationalHours": "Buka • 08:00 AM - 16:30 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4456",
+    "description": "Curup Gangsa memiliki debit air yang cukup besar dan lebar. Konon namanya berasal dari suara gemuruh airnya yang terdengar seperti suara seruling bambu (gangsa).",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Spot foto bebatuan raksasa di bawah air terjun ini sangat ikonik. Cocok untuk bersantai bersama keluarga."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" },
+      { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-002a", "imageUrl": "https://storage.waykananexplore.com/images/curup_gangsa_1.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-003",
+    "name": "Kampung Wisata Gedung Batin",
+    "location": {
+      "address": "Gedung Batin, Blambangan Umpu, Way Kanan, Lampung",
+      "latitude": -4.4890,
+      "longitude": 104.5300
+    },
+    "rating": 4.6,
+    "reviewsCount": 85,
+    "operationalHours": "Buka • 09:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4457",
+    "description": "Desa tradisional yang masih mempertahankan arsitektur rumah panggung kayu berusia ratusan tahun. Menawarkan pengalaman budaya lokal yang otentik.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Wajib menginap di homestay untuk merasakan keramahan warga dan mencicipi kuliner khas Way Kanan yang dimasak langsung dari tungku kayu."
+    },
+    "categories": [
+      { "id": "cat-005", "name": "Culture & History", "icon": "museum_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-003a", "imageUrl": "https://storage.waykananexplore.com/images/gedung_batin_1.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-004",
+    "name": "Arung Jeram Sungai Way Besai",
+    "location": {
+      "address": "Banjit, Way Kanan, Lampung",
+      "latitude": -4.6600,
+      "longitude": 104.3800
+    },
+    "rating": 4.8,
+    "reviewsCount": 150,
+    "operationalHours": "Buka • 08:00 AM - 15:00 PM",
+    "website": "waykananexplore.com/rafting",
+    "phone": "+62 811 2233 4458",
+    "description": "Rasakan adrenalin memompa dengan menyusuri jeram-jeram menantang di Sungai Way Besai. Tingkat kesulitan bervariasi dari grade II hingga III.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Peralatan sangat safety dan guidenya profesional. Pemandangan tebing di kiri-kanan sungai sangat epik!"
+    },
+    "categories": [
+      { "id": "cat-003", "name": "Outdoors", "icon": "hiking_outlined" },
+      { "id": "cat-006", "name": "Adventure", "icon": "kayaking_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-004a", "imageUrl": "https://storage.waykananexplore.com/images/sungai_way_besai.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-005",
+    "name": "Air Terjun Tirta Haji",
+    "location": {
+      "address": "Way Kanan, Lampung, 34764",
+      "latitude": -4.4350,
+      "longitude": 104.5310
+    },
+    "rating": 4.8,
+    "reviewsCount": 124,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4455",
+    "description": "Nikmati sensasi petualangan menyusuri jalur trekking yang menantang sebelum disambut oleh kesegaran air terjun.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Air Terjun Tirta Haji menyuguhkan pesona alam yang masih asri dan alami. Dengan dikelilingi hutan hijau yang rimbun."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-005a", "imageUrl": "https://storage.waykananexplore.com/images/air_terjun_tirta_haji.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-006",
+    "name": "Goa Kelelawar",
+    "location": {
+      "address": "Blambangan Umpu, Way Kanan, Lampung",
+      "latitude": -4.4500,
+      "longitude": 104.5100
+    },
+    "rating": 4.3,
+    "reviewsCount": 78,
+    "operationalHours": "Buka • 08:00 AM - 16:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4459",
+    "description": "Sebuah goa alami yang dihuni oleh ribuan kelelawar. Menyajikan stalaktit dan stalakmit dengan ornamen yang unik di dalamnya.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Gunakan masker saat masuk karena bau guano bisa cukup menyengat. Siapkan senter terang!"
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-006", "name": "Adventure", "icon": "kayaking_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-006a", "imageUrl": "https://storage.waykananexplore.com/images/goa_kelelawar.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-007",
+    "name": "Bukit Barisan Selatan (Area Way Kanan)",
+    "location": {
+      "address": "TNBBS Way Kanan, Lampung",
+      "latitude": -4.7200,
+      "longitude": 104.3000
+    },
+    "rating": 4.9,
+    "reviewsCount": 420,
+    "operationalHours": "Buka • 06:00 AM - 18:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4460",
+    "description": "Bagian dari Taman Nasional Bukit Barisan Selatan. Hutan tropis yang lebat dan kaya akan keanekaragaman hayati seperti gajah dan harimau sumatera (terbatas).",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Jungle trekking terbaik di ujung selatan Sumatera. Wajib didampingi ranger resmi."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-003", "name": "Outdoors", "icon": "hiking_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-007a", "imageUrl": "https://storage.waykananexplore.com/images/bukit_barisan.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-008",
+    "name": "Curup Kereta",
+    "location": {
+      "address": "Kasui, Way Kanan, Lampung",
+      "latitude": -4.5800,
+      "longitude": 104.4000
+    },
+    "rating": 4.7,
+    "reviewsCount": 130,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4461",
+    "description": "Air terjun yang unik karena bentuk air yang jatuh bertingkat-tingkat dan memanjang menyerupai gerbong kereta api.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Kolam di bawah air terjun cukup dangkal, sangat aman untuk anak-anak bermain air."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-008a", "imageUrl": "https://storage.waykananexplore.com/images/curup_kereta_1.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-009",
+    "name": "Sumber Air Panas Juku Batu",
+    "location": {
+      "address": "Juku Batu, Banjit, Way Kanan, Lampung",
+      "latitude": -4.6855,
+      "longitude": 104.3640
+    },
+    "rating": 4.4,
+    "reviewsCount": 95,
+    "operationalHours": "Buka • 07:00 AM - 18:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4462",
+    "description": "Pemandian air panas alami yang bersumber langsung dari aktivitas geotermal perut bumi. Dipercaya dapat menyembuhkan penyakit kulit.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Tempat sempurna untuk relaksasi otot setelah lelah trekking dari Air Terjun Putri Malu yang letaknya berdekatan."
+    },
+    "categories": [
+      { "id": "cat-007", "name": "Relaxation", "icon": "spa_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-009a", "imageUrl": "https://storage.waykananexplore.com/images/hot_spring_juku_batu.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-010",
+    "name": "Bendungan Way Umpu",
+    "location": {
+      "address": "Way Umpu, Way Kanan, Lampung",
+      "latitude": -4.4750,
+      "longitude": 104.5500
+    },
+    "rating": 4.2,
+    "reviewsCount": 112,
+    "operationalHours": "Buka • 06:00 AM - 18:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4463",
+    "description": "Infrastruktur irigasi masif yang kini juga berfungsi sebagai spot wisata. Menawarkan pemandangan sunset yang sangat cantik dengan latar pantulan air waduk.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Banyak warung kopi di pinggir bendungan, cocok untuk nyore santai menikmati angin sepoi-sepoi."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-010a", "imageUrl": "https://storage.waykananexplore.com/images/bendungan_way_umpu.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-011",
+    "name": "Curup Jepun",
+    "location": {
+      "address": "Negeri Agung, Way Kanan, Lampung",
+      "latitude": -4.5000,
+      "longitude": 104.4500
+    },
+    "rating": 4.5,
+    "reviewsCount": 88,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4464",
+    "description": "Air terjun mungil yang dikelilingi vegetasi rimbun. Dinamakan Jepun karena konon dulunya lokasi ini pernah dijadikan basis persembunyian pada masa penjajahan Jepang.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Hidden gem di Way Kanan. Sangat sunyi dan privat, suasananya menenangkan jiwa."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-011a", "imageUrl": "https://storage.waykananexplore.com/images/curup_jepun.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-012",
+    "name": "Puncak Bukit Punggur",
+    "location": {
+      "address": "Kasui, Way Kanan, Lampung",
+      "latitude": -4.6200,
+      "longitude": 104.4100
+    },
+    "rating": 4.6,
+    "reviewsCount": 140,
+    "operationalHours": "Buka • 24 Jam",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4465",
+    "description": "Spot terbaik untuk camping dan menikmati lautan awan di pagi hari. Memiliki ketinggian yang pas untuk pemula mendaki.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Matahari terbitnya juara! Pastikan bawa jaket tebal karena angin di puncak cukup dingin saat dini hari."
+    },
+    "categories": [
+      { "id": "cat-003", "name": "Outdoors", "icon": "hiking_outlined" },
+      { "id": "cat-006", "name": "Adventure", "icon": "kayaking_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-012a", "imageUrl": "https://storage.waykananexplore.com/images/bukit_punggur.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-013",
+    "name": "Taman Wisata Lembah Hijau Way Kanan",
+    "location": {
+      "address": "Baradatu, Way Kanan, Lampung",
+      "latitude": -4.6400,
+      "longitude": 104.4800
+    },
+    "rating": 4.3,
+    "reviewsCount": 310,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4466",
+    "description": "Taman wisata buatan yang ramah anak. Terdapat berbagai wahana permainan, spot foto instagenic, dan kolam renang.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Destinasi andalan keluarga saat akhir pekan. Fasilitasnya lengkap dari gazebo hingga area parkir luas."
+    },
+    "categories": [
+      { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-013a", "imageUrl": "https://storage.waykananexplore.com/images/lembah_hijau_wk.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-014",
+    "name": "Air Terjun Kincir",
+    "location": {
+      "address": "Rebang Tangkas, Way Kanan, Lampung",
+      "latitude": -4.5600,
+      "longitude": 104.3400
+    },
+    "rating": 4.5,
+    "reviewsCount": 65,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4467",
+    "description": "Di sekitar air terjun ini dulunya terdapat banyak kincir air buatan warga untuk irigasi tradisional, sehingga dinamakan Air Terjun Kincir.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Debit airnya stabil meski di musim kemarau. Airnya luar biasa jernih kebiruan."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-014a", "imageUrl": "https://storage.waykananexplore.com/images/curup_kincir.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-015",
+    "name": "Curup Tayan",
+    "location": {
+      "address": "Gunung Labuhan, Way Kanan, Lampung",
+      "latitude": -4.6800,
+      "longitude": 104.5500
+    },
+    "rating": 4.6,
+    "reviewsCount": 72,
+    "operationalHours": "Buka • 08:00 AM - 16:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4468",
+    "description": "Air terjun perawan yang jarang terekspos. Dikelilingi perkebunan kopi warga yang asri dan udara yang sejuk.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Surga tersembunyi bagi pecinta alam. Trek masuknya mengharuskan jalan kaki sekitar 30 menit membelah kebun."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-015a", "imageUrl": "https://storage.waykananexplore.com/images/curup_tayan.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-016",
+    "name": "Air Terjun Cangkah Kidau",
+    "location": {
+      "address": "Banjit, Way Kanan, Lampung",
+      "latitude": -4.6700,
+      "longitude": 104.3700
+    },
+    "rating": 4.4,
+    "reviewsCount": 45,
+    "operationalHours": "Buka • 08:00 AM - 16:30 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4469",
+    "description": "Air terjun dengan bebatuan besar berundak. 'Cangkah Kidau' berarti melangkah ke kiri dalam bahasa setempat, merujuk pada arus sungainya.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Suasana hutan bambu di sekitarnya menambah kesan magis dan teduh di lokasi ini."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-016a", "imageUrl": "https://storage.waykananexplore.com/images/cangkah_kidau.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-017",
+    "name": "Hutan Kota Blambangan Umpu",
+    "location": {
+      "address": "Blambangan Umpu, Way Kanan, Lampung",
+      "latitude": -4.4550,
+      "longitude": 104.5200
+    },
+    "rating": 4.1,
+    "reviewsCount": 220,
+    "operationalHours": "Buka • 06:00 AM - 18:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4470",
+    "description": "Paru-paru kota kabupaten Way Kanan. Dilengkapi jogging track dan bangku-bangku taman untuk bersantai.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Sangat pas untuk lari pagi santai. Udara segar di tengah hiruk pikuk pusat pemerintahan."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-017a", "imageUrl": "https://storage.waykananexplore.com/images/hutan_kota_bu.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-018",
+    "name": "Wisata Alam Margo Mulyo",
+    "location": {
+      "address": "Tumijajar, Way Kanan, Lampung",
+      "latitude": -4.5300,
+      "longitude": 104.5800
+    },
+    "rating": 4.2,
+    "reviewsCount": 105,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4471",
+    "description": "Kawasan ekowisata perbukitan yang menawarkan wisata agrikultur. Pengunjung bisa belajar bercocok tanam dan panen langsung.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Edukasi yang bagus untuk anak-anak. Jangan lupa mencoba minuman jeruk peras segar asli dari kebun."
+    },
+    "categories": [
+      { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" },
+      { "id": "cat-008", "name": "Agrotourism", "icon": "agriculture_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-018a", "imageUrl": "https://storage.waykananexplore.com/images/margo_mulyo.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-019",
+    "name": "Danau Lebar Way Kanan",
+    "location": {
+      "address": "Bumi Agung, Way Kanan, Lampung",
+      "latitude": -4.5900,
+      "longitude": 104.4900
+    },
+    "rating": 4.0,
+    "reviewsCount": 85,
+    "operationalHours": "Buka • 07:00 AM - 17:30 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4472",
+    "description": "Danau tenang dengan pemandangan pegunungan dari kejauhan. Pengunjung bisa menyewa perahu kayu atau memancing.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Spot favorit para pemancing lokal. Suasananya begitu hening, cocok untuk lari dari stress."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-019a", "imageUrl": "https://storage.waykananexplore.com/images/danau_lebar.jpg", "isPrimary": true }
+    ]
+  },
+  {
+    "id": "dest-020",
+    "name": "Curup Kembar",
+    "location": {
+      "address": "Banjit, Way Kanan, Lampung",
+      "latitude": -4.6880,
+      "longitude": 104.3600
+    },
+    "rating": 4.5,
+    "reviewsCount": 110,
+    "operationalHours": "Buka • 08:00 AM - 17:00 PM",
+    "website": "waykananexplore.com",
+    "phone": "+62 811 2233 4473",
+    "description": "Memiliki dua aliran air terjun berdampingan yang bentuknya hampir identik. Aksesnya searah dengan Air Terjun Putri Malu.",
+    "ourTake": {
+      "author": "Admin Tim",
+      "authorAvatar": "https://storage.waykananexplore.com/images/WayKananExploreLogo.png",
+      "content": "Lebih sepi dibanding Putri Malu, sangat bagus buat yang suka menikmati alam tanpa terganggu banyak orang."
+    },
+    "categories": [
+      { "id": "cat-001", "name": "Nature", "icon": "park_outlined" },
+      { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
+    ],
+    "galleries": [
+      { "id": "gal-020a", "imageUrl": "https://storage.waykananexplore.com/images/curup_kembar.jpg", "isPrimary": true }
+    ]
+  }
+]
