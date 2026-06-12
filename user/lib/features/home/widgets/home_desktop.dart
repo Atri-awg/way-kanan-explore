@@ -3,6 +3,8 @@ import 'package:user/core/constants/app_assets.dart';
 import 'package:user/core/constants/app_colors.dart';
 import 'package:user/features/home/widgets/feature_card.dart';
 import 'package:user/features/home/widgets/destination_card.dart';
+import 'package:user/features/destination/models/destination_model.dart';
+import 'package:user/features/destination/services/destination_service.dart';
 
 class HomeDesktop extends StatelessWidget {
   const HomeDesktop({super.key});
@@ -16,16 +18,16 @@ class HomeDesktop extends StatelessWidget {
           children: [
             // Navbar
             _buildNavbar(context),
-            
+
             // Hero Section
             _buildHeroSection(),
-            
+
             // Feature Cards Section
             _buildFeaturesSection(),
-            
+
             // Popular Destinations Section
             _buildPopularDestinationsSection(),
-            
+
             // Footer spacing
             const SizedBox(height: 60),
           ],
@@ -56,15 +58,12 @@ class HomeDesktop extends StatelessWidget {
             errorBuilder: (context, error, stackTrace) {
               return const Text(
                 'Waykanan EXPLORE',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               );
             },
           ),
           const Spacer(),
-          
+
           // Menu Items
           _buildNavItem('Beranda', isActive: true),
           _buildNavItem('Destinasi'),
@@ -72,9 +71,9 @@ class HomeDesktop extends StatelessWidget {
           _buildNavItem('Artikel'),
           _buildNavItem('Galeri'),
           _buildNavItem('Kontak'),
-          
+
           const SizedBox(width: 20),
-          
+
           // CTA Button
           ElevatedButton(
             onPressed: () {},
@@ -90,10 +89,7 @@ class HomeDesktop extends StatelessWidget {
               children: const [
                 Text(
                   'Jelajahi Sekarang',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(width: 8),
                 Icon(Icons.arrow_forward, size: 16),
@@ -305,7 +301,8 @@ class HomeDesktop extends StatelessWidget {
               child: FeatureCard(
                 icon: Icons.map,
                 title: 'Petualangan Seru',
-                description: 'Ragam aktivitas outdoor untuk pengalaman tak terlupakan',
+                description:
+                    'Ragam aktivitas outdoor untuk pengalaman tak terlupakan',
                 iconColor: const Color(0xFFE63946),
               ),
             ),
@@ -316,96 +313,43 @@ class HomeDesktop extends StatelessWidget {
   }
 
   Widget _buildPopularDestinationsSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 80),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'DESTINASI POPULER',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: AppColors.orange,
-              letterSpacing: 1.2,
-            ),
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Jelajahi Keindahan Way Kanan',
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textBlack,
-              height: 1.2,
-            ),
-          ),
-          const SizedBox(height: 40),
-          SizedBox(
-            height: 280,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                DestinationCard(
-                  imageUrl: AppAssets.destination1,
-                  title: 'Air Terjun Tirta Haji',
-                  location: 'Banjit, Way Kanan',
-                  onTap: () {},
-                ),
-                DestinationCard(
-                  imageUrl: AppAssets.destination2,
-                  title: 'Sungai Way Besai',
-                  location: 'Negeri Besar, Way Kanan',
-                  onTap: () {},
-                ),
-                DestinationCard(
-                  imageUrl: AppAssets.destination3,
-                  title: 'Bukit Barisan Selatan',
-                  location: 'Way Kanan',
-                  onTap: () {},
-                ),
-                DestinationCard(
-                  imageUrl: AppAssets.destination4,
-                  title: 'Goa Kelelawar',
-                  location: 'Banjit, Way Kanan',
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 40),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primaryDark,
-                foregroundColor: AppColors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 18,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+    final service = DestinationService();
+
+    return FutureBuilder<List<Destination>>(
+      future: service.getDestinations(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final destinations = snapshot.data!;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 80),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('DESTINASI POPULER'),
+
+              const SizedBox(height: 40),
+
+              SizedBox(
+                height: 280,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: destinations.length,
+                  itemBuilder: (context, index) {
+                    return DestinationCard(
+                      destination: destinations[index],
+                      onTap: () {},
+                    );
+                  },
                 ),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    'Lihat Semua Destinasi',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward, size: 18),
-                ],
-              ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
