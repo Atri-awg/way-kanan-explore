@@ -32,48 +32,52 @@ class DestinationCard extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
-              child: destination.imageUrl.isNotEmpty
-                  ? Image.asset(
-                      destination.imageUrl,
-                      width: double.infinity,
-                      height: 160,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                          'assets/images/default_destination.jpg',
-                          width: double.infinity,
-                          height: 160,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              height: 160,
-                              color: Colors.grey.shade300,
-                              child: const Center(
-                                child: Icon(
-                                  Icons.image_not_supported,
-                                  size: 50,
+              // BUNGKUS DENGAN HERO DI SINI
+              child: Hero(
+                tag: 'destination-img-${destination.id}',
+                child: destination.imageUrl.isNotEmpty
+                    ? Image.asset(
+                        destination.imageUrl,
+                        width: double.infinity,
+                        height: 160,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/default_destination.jpg',
+                            width: double.infinity,
+                            height: 160,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                height: 160,
+                                color: Colors.grey.shade300,
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.image_not_supported,
+                                    size: 50,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    )
-                  : Image.asset(
-                      'assets/images/default_destination.jpg',
-                      width: double.infinity,
-                      height: 160,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          height: 160,
-                          color: Colors.grey.shade300,
-                          child: const Center(
-                            child: Icon(Icons.image_not_supported, size: 50),
-                          ),
-                        );
-                      },
-                    ),
+                              );
+                            },
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        'assets/images/default_destination.jpg',
+                        width: double.infinity,
+                        height: 160,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            height: 160,
+                            color: Colors.grey.shade300,
+                            child: const Center(
+                              child: Icon(Icons.image_not_supported, size: 50),
+                            ),
+                          );
+                        },
+                      ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(12),
@@ -103,7 +107,6 @@ class DestinationCard extends StatelessWidget {
                         child: Text(
                           destination.location.address,
                           style: const TextStyle(
-                            // Menambahkan const di sini
                             fontSize: 13,
                             color: AppColors.textGrey,
                           ),
