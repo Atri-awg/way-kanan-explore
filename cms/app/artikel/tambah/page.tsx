@@ -1,104 +1,243 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+interface Kategori {
+  id: string;
+  nama: string;
+}
 
 export default function TambahArtikelPage() {
   const router = useRouter();
 
+  const [kategori, setKategori] = useState<Kategori[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const [form, setForm] = useState({
+    title: "",
+    excerpt: "",
+    content: "",
+    categoryId: "",
+    thumbnailId: "",
+    author: "",
+    featured: false,
+    status: "DRAFT",
+  });
+
+  // Ambil kategori
+  useEffect(() => {
+    const getKategori = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_KATEGORI_API}/api/kategori`
+        );
+
+        const result = await res.json();
+
+        setKategori(result.data);
+      } catch (error) {
+        console.error(error);
+        toast.error("Gagal mengambil kategori");
+      }
+    };
+
+    getKategori();
+  }, []);
+
+  // Handle input
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement |
+      HTMLTextAreaElement |
+      HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  // Submit
+  const handleSubmit = async (
+    e: React.FormEvent
+  ) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_ARTICLE_API}/api/article`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error();
+      }
+
+      toast.success("Artikel berhasil ditambahkan");
+
+      router.push("/artikel");
+
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Gagal menambahkan artikel");
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
-    <div className="rounded-xl bg-white p-6 shadow">
-      <h1 className="mb-2 text-3xl font-bold">
-        Tambah Artikel
-      </h1>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-5 bg-white p-6 rounded-xl shadow"
+    >
+      {/* Judul */}
+      <div>
+        <label>Judul</label>
+        <input
+          name="title"
+          className="w-full border p-2 rounded"
+          onChange={handleChange}
+        />
+      </div>
 
-      <p className="mb-6 text-gray-500">
-        Tambahkan artikel wisata baru
-      </p>
+      {/* Ringkasan */}
+      <div>
+        <label>Ringkasan</label>
+        <textarea
+          name="excerpt"
+          className="w-full border p-2 rounded"
+          onChange={handleChange}
+        />
+      </div>
 
-      <form className="space-y-5">
-        <div>
-          <label className="block mb-2 font-medium">
-            Judul Artikel
-          </label>
+      {/* Isi */}
+      <div>
+        <label>Isi Artikel</label>
+        <textarea
+          name="content"
+          rows={8}
+          className="w-full border p-2 rounded"
+          onChange={handleChange}
+        />
+      </div>
 
-          <input
-            type="text"
-            className="w-full rounded-lg border p-3"
-          />
-        </div>
 
-        <div>
-          <label className="block mb-2 font-medium">
-            Slug
-          </label>
+      {/* Kategori */}
+      <div>
+        <label>Kategori</label>
 
-          <input
-            type="text"
-            className="w-full rounded-lg border p-3"
-          />
-        </div>
+        <select
+          name="categoryId"
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+        >
+          <option value="">
+            Pilih Kategori
+          </option>
 
-        <div>
-          <label className="block mb-2 font-medium">
-            Thumbnail
-          </label>
+          {kategori.map((item) => (
+            <option
+              key={item.id}
+              value={item.id}
+            >
+              {item.nama}
+            </option>
+          ))}
 
-          <input
-            type="file"
-            className="w-full rounded-lg border p-3"
-          />
-        </div>
+        </select>
+      </div>
 
-        <div>
-          <label className="block mb-2 font-medium">
-            Ringkasan
-          </label>
 
-          <textarea
-            rows={3}
-            className="w-full rounded-lg border p-3"
-          />
-        </div>
+      {/* Thumbnail */}
+      <div>
+        <label>ID Thumbnail</label>
 
-        <div>
-          <label className="block mb-2 font-medium">
-            Konten Artikel
-          </label>
+        <input
+          name="thumbnailId"
+          className="w-full border p-2 rounded"
+          onChange={handleChange}
+        />
+      </div>
 
-          <textarea
-            rows={10}
-            className="w-full rounded-lg border p-3"
-          />
-        </div>
 
-        <div>
-          <label className="block mb-2 font-medium">
-            Status
-          </label>
+      {/* Penulis */}
+      <div>
+        <label>Penulis</label>
 
-          <select className="w-full rounded-lg border p-3">
-            <option>Draft</option>
-            <option>Publish</option>
-          </select>
-        </div>
+        <input
+          name="author"
+          className="w-full border p-2 rounded"
+          onChange={handleChange}
+        />
+      </div>
 
-        <div className="flex gap-3">
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-5 py-3 rounded-lg"
-          >
-            Simpan
-          </button>
 
-          <button
-            type="button"
-            onClick={() => router.push("/artikel")}
-            className="bg-gray-200 px-5 py-3 rounded-lg"
-          >
-            Batal
-          </button>
-        </div>
-      </form>
-    </div>
+      {/* Featured */}
+      <div className="flex gap-2">
+
+        <input
+          type="checkbox"
+          onChange={(e) =>
+            setForm({
+              ...form,
+              featured: e.target.checked,
+            })
+          }
+        />
+
+        <label>Artikel Unggulan</label>
+
+      </div>
+
+
+      {/* Status */}
+      <div>
+
+        <label>Status</label>
+
+        <select
+          name="status"
+          onChange={handleChange}
+          className="w-full border p-2 rounded"
+        >
+          <option value="DRAFT">
+            Draft
+          </option>
+
+          <option value="PUBLISHED">
+            Publish
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        disabled={loading}
+        className="bg-green-600 text-white px-5 py-2 rounded"
+      >
+        {loading
+          ? "Menyimpan..."
+          : "Simpan Artikel"}
+      </button>
+
+    </form>
   );
 }
