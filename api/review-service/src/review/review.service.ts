@@ -9,4 +9,7 @@ import { UpdateReviewDto } from './dto/update-review.dto';
 import { QueryReviewDto } from './dto/query-review.dto';
 
 @Injectable()
-export class ReviewService {}
+export class ReviewService {
+  constructor(private readonly prisma: PrismaService) {}
+  
+}
