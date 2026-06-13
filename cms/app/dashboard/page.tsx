@@ -92,7 +92,7 @@ export default function DashboardPage() {
 
         <div className="bg-white p-5 rounded-xl shadow">
           <h2 className="font-semibold mb-4">
-            Statistik Perangkat
+            Baru Saja DiTambahkan
           </h2>
 
           <DeviceChart />
