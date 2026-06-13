@@ -10,13 +10,15 @@ class DestinationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(destination.name);
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 250,
+        width: double.infinity,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: Colors.red,
+          // color: AppColors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
