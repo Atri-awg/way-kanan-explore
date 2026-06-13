@@ -119,4 +119,33 @@ export class ReviewService {
       data,
     };
   }
+
+  async remove(id: string) {
+    const review = await this.prisma.review.findUnique({
+      where: { id },
+    });
+
+    if (!review) {
+      throw new NotFoundException({
+        success: false,
+        message: 'Review tidak ditemukan',
+      });
+    }
+
+    await this.prisma.review.update({
+      where: { id },
+      data: {
+        status: false,
+        deletedAt: new Date(),
+      },
+    });
+
+    return {
+      success: true,
+      message: 'Review berhasil dihapus',
+      metadata: {
+        status: HttpStatus.OK,
+      },
+    };
+  }
 }
