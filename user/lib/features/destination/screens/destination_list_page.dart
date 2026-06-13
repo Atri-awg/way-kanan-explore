@@ -46,24 +46,27 @@ class _DestinationListPageState extends State<DestinationListPage> {
   }
 
   void searchDestination(String keyword) {
-    setState(() {
-      filteredDestinations = allDestinations.where((destination) {
-        return destination.name.toLowerCase().contains(keyword.toLowerCase());
-      }).toList();
-    });
+    searchKeyword = keyword;
+    applyFilters();
   }
 
   void filterCategory(String category) {
-    if (category == "All") {
-      setState(() {
-        filteredDestinations = allDestinations;
-      });
-      return;
-    }
+    selectedCategory = category;
+    applyFilters();
+  }
 
+  void applyFilters() {
     setState(() {
       filteredDestinations = allDestinations.where((destination) {
-        return destination.categories.any((c) => c.name == category);
+        final matchSearch = destination.name.toLowerCase().contains(
+          searchKeyword.toLowerCase(),
+        );
+
+        final matchCategory =
+            selectedCategory == "All" ||
+            destination.categories.any((c) => c.name == selectedCategory);
+
+        return matchSearch && matchCategory;
       }).toList();
     });
   }
