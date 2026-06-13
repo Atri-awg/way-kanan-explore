@@ -20,7 +20,7 @@ async function bootstrap(): Promise<void> {
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3002);
+  await app.listen(process.env.PORT ?? 3005);
 }
 
 void bootstrap();
