@@ -103,12 +103,7 @@ export default function Navbar() {
         {/* Notification */}
         <div className="relative cursor-pointer">
           <Bell size={22} />
-
-          <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            3
-          </span>
         </div>
-
 
         {/* User */}
         <div className="flex items-center gap-3">
