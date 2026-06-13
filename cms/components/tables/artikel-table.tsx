@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Pencil, Trash2, Star } from "lucide-react";
+import { toast } from "sonner";
 
 interface Article {
   id: string;
@@ -48,6 +49,32 @@ export default function ArtikelTable() {
       </div>
     );
   }
+
+  const handleDelete = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_ARTICLE_API}/api/article/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error();
+    }
+
+    toast.success("Artikel berhasil dihapus");
+
+    setArtikel((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
+
+  } catch (error) {
+    console.error(error);
+
+    toast.error("Gagal menghapus artikel");
+  }
+};
 
   return (
     <div className="overflow-x-auto">
