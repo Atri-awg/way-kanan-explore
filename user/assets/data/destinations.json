@@ -24,8 +24,8 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-001a", "imageUrl": "assets/images/putri_malu_1.jpg", "isPrimary": true },
-      { "id": "gal-001b", "imageUrl": "assets/images/putri_malu_2.jpg", "isPrimary": false }
+      { "id": "gal-001a", "imageUrl": "assets/images/air_terjun_putri_malu.jpg", "isPrimary": true },
+      { "id": "gal-001b", "imageUrl": "assets/images/default_destination.jpg", "isPrimary": false }
     ]
   },
   {
@@ -248,7 +248,7 @@
       { "id": "cat-007", "name": "Relaxation", "icon": "spa_outlined" }
     ],
     "galleries": [
-      { "id": "gal-009a", "imageUrl": "assets/images/hot_spring_juku_batu.jpg", "isPrimary": true }
+      { "id": "gal-009a", "imageUrl": "assets/images/default_destination.jpg", "isPrimary": true }
     ]
   },
   {
@@ -276,7 +276,7 @@
       { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
     ],
     "galleries": [
-      { "id": "gal-010a", "imageUrl": "assets/images/bendungan_way_umpu.jpg", "isPrimary": true }
+      { "id": "gal-010a", "imageUrl": "assets/images/default_destination.jpg", "isPrimary": true }
     ]
   },
   {
