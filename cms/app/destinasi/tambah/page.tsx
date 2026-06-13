@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const API_KATEGORI = "http://localhost:3002/api/kategori";
-const API_DESTINASI = "http://localhost:3003/api/destinasi";
+const API_KATEGORI = `${process.env.NEXT_PUBLIC_KATEGORI_API}/api/kategori`;
+const API_DESTINASI = `${process.env.NEXT_PUBLIC_DESTINASI_API}/api/destinasi`;
 
 type Kategori = {
   id: number;
