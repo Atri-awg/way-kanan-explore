@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/destination_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DestinationDetailPage extends StatelessWidget {
   final Destination destination;
@@ -12,6 +13,14 @@ class DestinationDetailPage extends StatelessWidget {
     }
 
     return 'assets/images/default_destination.jpg';
+  }
+
+  Future<void> openMap() async {
+    final url = Uri.parse(
+      "https://www.google.com/maps/search/?api=1&query=${destination.location.latitude},${destination.location.longitude}",
+    );
+
+    await launchUrl(url, mode: LaunchMode.externalApplication);
   }
 
   @override
@@ -99,10 +108,13 @@ class DestinationDetailPage extends StatelessWidget {
                           topLeft: Radius.circular(16),
                           bottomLeft: Radius.circular(16),
                         ),
-                        child: Image.asset(
-                          getMainImage(),
-                          fit: BoxFit.cover,
-                          height: double.infinity,
+                        child: Hero(
+                          tag: 'destination-img-${destination.id}',
+                          child: Image.asset(
+                            getMainImage(),
+                            fit: BoxFit.cover,
+                            height: double.infinity,
+                          ),
                         ),
                       ),
                     ),
@@ -116,10 +128,14 @@ class DestinationDetailPage extends StatelessWidget {
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(16),
                               ),
-                              child: Image.asset(
-                                getMainImage(),
-                                fit: BoxFit.cover,
-                                width: double.infinity,
+
+                              child: Hero(
+                                tag: 'destination-img-${destination.id}',
+                                child: Image.asset(
+                                  getMainImage(),
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                ),
                               ),
                             ),
                           ),
@@ -129,10 +145,13 @@ class DestinationDetailPage extends StatelessWidget {
                               borderRadius: const BorderRadius.only(
                                 bottomRight: Radius.circular(16),
                               ),
-                              child: Image.asset(
-                                getMainImage(),
-                                fit: BoxFit.cover,
-                                width: double.infinity,
+                              child: Hero(
+                                tag: 'destination-img-${destination.id}',
+                                child: Image.asset(
+                                  getMainImage(),
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                ),
                               ),
                             ),
                           ),
