@@ -10,12 +10,10 @@ class DestinationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(destination.name);
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        // margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(12),
@@ -34,17 +32,48 @@ class DestinationCard extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
-              child: Image.network(
-                destination.imageUrl,
-                width: double.infinity,
-                height: 160,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Center(
-                    child: Icon(Icons.broken_image, size: 50),
-                  );
-                },
-              ),
+              child: destination.imageUrl.isNotEmpty
+                  ? Image.asset(
+                      destination.imageUrl,
+                      width: double.infinity,
+                      height: 160,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          'assets/images/default_destination.jpg',
+                          width: double.infinity,
+                          height: 160,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              height: 160,
+                              color: Colors.grey.shade300,
+                              child: const Center(
+                                child: Icon(
+                                  Icons.image_not_supported,
+                                  size: 50,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    )
+                  : Image.asset(
+                      'assets/images/default_destination.jpg',
+                      width: double.infinity,
+                      height: 160,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          height: 160,
+                          color: Colors.grey.shade300,
+                          child: const Center(
+                            child: Icon(Icons.image_not_supported, size: 50),
+                          ),
+                        );
+                      },
+                    ),
             ),
             Padding(
               padding: const EdgeInsets.all(12),
@@ -73,7 +102,8 @@ class DestinationCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           destination.location.address,
-                          style: TextStyle(
+                          style: const TextStyle(
+                            // Menambahkan const di sini
                             fontSize: 13,
                             color: AppColors.textGrey,
                           ),

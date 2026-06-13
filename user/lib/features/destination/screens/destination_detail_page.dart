@@ -175,6 +175,54 @@ class DestinationDetailPage extends StatelessWidget {
                         fontSize: 14,
                       ),
                     ),
+                    const SizedBox(height: 24),
+
+                    const Text(
+                      'Galeri',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    SizedBox(
+                      height: 120,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: destination.galleries.length,
+                        itemBuilder: (context, index) {
+                          final gallery = destination.galleries[index];
+
+                          return Container(
+                            width: 150,
+                            margin: const EdgeInsets.only(right: 12),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                gallery.imageUrl,
+                                fit: BoxFit.cover,
+                                errorBuilder: (_, __, ___) {
+                                  return Container(
+                                    color: Colors.grey.shade300,
+                                    child: const Icon(Icons.image),
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: destination.categories.map((category) {
+                        return Chip(label: Text(category.name));
+                      }).toList(),
+                    ),
                     const SizedBox(height: 16),
                     Row(
                       children: [
