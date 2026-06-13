@@ -6,27 +6,47 @@ import 'package:user/features/home/widgets/destination_card.dart';
 import 'package:user/features/destination/models/destination_model.dart';
 import 'package:user/features/destination/services/destination_service.dart';
 
+// Import halaman tujuan berdasarkan struktur folder Anda
+import 'package:user/features/about/screens/about_way_kanan_page.dart';
+import 'package:user/features/article/screens/article_page.dart';
+import 'package:user/features/contact/screens/contact_page.dart';
+import 'package:user/features/gallery/screens/gallery_page.dart';
+import 'package:user/features/destination/screens/destination_list_page.dart';
+
 class HomeDesktop extends StatelessWidget {
-  const HomeDesktop({super.key});
+  HomeDesktop({super.key});
+
+  final DestinationService _destinationService = DestinationService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             // Navbar
             _buildNavbar(context),
 
-            // Hero Section
-            _buildHeroSection(),
+            // Hero dan Feature Cards (Menggunakan Stack agar tidak error klik)
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                _buildHeroSection(context),
+                Positioned(
+                  bottom: -60, 
+                  left: 0,
+                  right: 0,
+                  child: _buildFeaturesSection(),
+                ),
+              ],
+            ),
 
-            // Feature Cards Section
-            _buildFeaturesSection(),
+            const SizedBox(height: 100),
 
             // Popular Destinations Section
-            _buildPopularDestinationsSection(),
+            _buildPopularDestinationsSection(context),
 
             // Footer spacing
             const SizedBox(height: 60),
@@ -43,7 +63,7 @@ class HomeDesktop extends StatelessWidget {
         color: AppColors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -64,19 +84,32 @@ class HomeDesktop extends StatelessWidget {
           ),
           const Spacer(),
 
-          // Menu Items
-          _buildNavItem('Beranda', isActive: true),
-          _buildNavItem('Destinasi'),
-          _buildNavItem('Tentang Way Kanan'),
-          _buildNavItem('Artikel'),
-          _buildNavItem('Galeri'),
-          _buildNavItem('Kontak'),
+          // Menu Items dengan Navigator.push (Tanpa const pada page yang tidak mendukung)
+          _buildNavItem('Beranda', isActive: true, onTap: () {}),
+          _buildNavItem('Destinasi', onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => DestinationListPage()));
+          }),
+          _buildNavItem('Tentang Way Kanan', onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutWayKananPage()));
+          }),
+          _buildNavItem('Artikel', onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ArticlePage()));
+          }),
+          _buildNavItem('Galeri', onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPage()));
+          }),
+          _buildNavItem('Kontak', onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactPage()));
+          }),
 
           const SizedBox(width: 20),
 
           // CTA Button
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+               // Arahkan ke halaman Destinasi juga sebagai aksi default CTA
+               Navigator.push(context, MaterialPageRoute(builder: (context) => DestinationListPage()));
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primaryDark,
               foregroundColor: AppColors.white,
@@ -101,33 +134,37 @@ class HomeDesktop extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(String title, {bool isActive = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-              color: isActive ? AppColors.textBlack : AppColors.textGrey,
+  Widget _buildNavItem(String title, {bool isActive = false, VoidCallback? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                color: isActive ? AppColors.textBlack : AppColors.textGrey,
+              ),
             ),
-          ),
-          if (isActive)
-            Container(
-              margin: const EdgeInsets.only(top: 4),
-              height: 2,
-              width: 40,
-              color: AppColors.primaryDark,
-            ),
-        ],
+            if (isActive)
+              Container(
+                margin: const EdgeInsets.only(top: 4),
+                height: 2,
+                width: 40,
+                color: AppColors.primaryDark,
+              ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildHeroSection() {
+  Widget _buildHeroSection(BuildContext context) {
     return Container(
       height: 600,
       decoration: BoxDecoration(
@@ -135,7 +172,6 @@ class HomeDesktop extends StatelessWidget {
         image: const DecorationImage(
           image: AssetImage('assets/images/hero_waterfall.jpg'),
           fit: BoxFit.cover,
-          // Fallback jika gambar tidak ada
           onError: null,
         ),
       ),
@@ -145,8 +181,8 @@ class HomeDesktop extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.black.withValues(alpha: 0.4),
-              Colors.black.withValues(alpha: 0.6),
+              Colors.black.withOpacity(0.4),
+              Colors.black.withOpacity(0.6),
             ],
           ),
         ),
@@ -200,27 +236,20 @@ class HomeDesktop extends StatelessWidget {
               Row(
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DestinationListPage()));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryDark,
                       foregroundColor: AppColors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 20,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: Row(
                       children: const [
-                        Text(
-                          'Jelajahi Sekarang',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        Text('Jelajahi Sekarang', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                         SizedBox(width: 8),
                         Icon(Icons.arrow_forward, size: 18),
                       ],
@@ -232,10 +261,7 @@ class HomeDesktop extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       foregroundColor: AppColors.white,
                       side: const BorderSide(color: AppColors.white, width: 2),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 20,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -244,13 +270,7 @@ class HomeDesktop extends StatelessWidget {
                       children: const [
                         Icon(Icons.play_circle_outline, size: 24),
                         SizedBox(width: 8),
-                        Text(
-                          'Tonton Video',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        Text('Tonton Video', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                       ],
                     ),
                   ),
@@ -264,59 +284,53 @@ class HomeDesktop extends StatelessWidget {
   }
 
   Widget _buildFeaturesSection() {
-    return Transform.translate(
-      offset: const Offset(0, -60),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 80),
-        child: Row(
-          children: [
-            Expanded(
-              child: FeatureCard(
-                icon: Icons.landscape,
-                title: 'Alam Menakjubkan',
-                description: 'Air terjun, sungai, dan pegunungan yang memukau',
-                iconColor: AppColors.primaryDark,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80),
+      child: Row(
+        children: [
+          Expanded(
+            child: FeatureCard(
+              icon: Icons.landscape,
+              title: 'Alam Menakjubkan',
+              description: 'Air terjun, sungai, dan pegunungan yang memukau',
+              iconColor: AppColors.primaryDark,
             ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: FeatureCard(
-                icon: Icons.camera_alt,
-                title: 'Destinasi Eksotis',
-                description: 'Tempat wisata hidden gem yang wajib dikunjungi',
-                iconColor: AppColors.orange,
-              ),
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: FeatureCard(
+              icon: Icons.camera_alt,
+              title: 'Destinasi Eksotis',
+              description: 'Tempat wisata hidden gem yang wajib dikunjungi',
+              iconColor: AppColors.orange,
             ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: FeatureCard(
-                icon: Icons.people,
-                title: 'Budaya Lestari',
-                description: 'Tradisi dan budaya lokal yang masih terjaga',
-                iconColor: const Color(0xFF6B4226),
-              ),
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: FeatureCard(
+              icon: Icons.people,
+              title: 'Budaya Lestari',
+              description: 'Tradisi dan budaya lokal yang masih terjaga',
+              iconColor: const Color(0xFF6B4226),
             ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: FeatureCard(
-                icon: Icons.map,
-                title: 'Petualangan Seru',
-                description:
-                    'Ragam aktivitas outdoor untuk pengalaman tak terlupakan',
-                iconColor: const Color(0xFFE63946),
-              ),
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: FeatureCard(
+              icon: Icons.map,
+              title: 'Petualangan Seru',
+              description: 'Ragam aktivitas outdoor untuk pengalaman tak terlupakan',
+              iconColor: const Color(0xFFE63946),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildPopularDestinationsSection() {
-    final service = DestinationService();
-
+  Widget _buildPopularDestinationsSection(BuildContext context) {
     return FutureBuilder<List<Destination>>(
-      future: service.getDestinations(),
+      future: _destinationService.getDestinations(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
@@ -329,19 +343,33 @@ class HomeDesktop extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('DESTINASI POPULER'),
-
-              const SizedBox(height: 40),
-
+              const Text(
+                'DESTINASI POPULER',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textBlack,
+                ),
+              ),
+              const SizedBox(height: 24),
               SizedBox(
                 height: 280,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
                   itemCount: destinations.length,
                   itemBuilder: (context, index) {
-                    return DestinationCard(
-                      destination: destinations[index],
-                      onTap: () {},
+                    return SizedBox(
+                      width: 260, 
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 24),
+                        child: DestinationCard(
+                          destination: destinations[index],
+                          onTap: () {
+                             // Arahkan ke Detail Destinasi saat diklik (bisa disesuaikan dengan navigasi yang ada di aplikasi Anda)
+                          },
+                        ),
+                      ),
                     );
                   },
                 ),
