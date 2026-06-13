@@ -56,7 +56,7 @@ class DestinationDetailPage extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    destination.reviewsCount.toStringAsFixed(1),
+                    destination.reviewsCount.toString(),
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   const Spacer(),
@@ -109,7 +109,7 @@ class DestinationDetailPage extends StatelessWidget {
                                 topRight: Radius.circular(16),
                               ),
                               child: Image.asset(
-                                'assets/images/bukit_barisan.jpg',
+                                destination.galleries[0].imageUrl,
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),
@@ -122,7 +122,7 @@ class DestinationDetailPage extends StatelessWidget {
                                 bottomRight: Radius.circular(16),
                               ),
                               child: Image.asset(
-                                destination.galleries[1].imageUrl,
+                                destination.galleries[0].imageUrl,
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),
