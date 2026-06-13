@@ -33,18 +33,16 @@ class DestinationCard extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
-              child: Container(
+              child: Image.network(
+                destination.imageUrl,
+                width: double.infinity,
                 height: 160,
-                decoration: BoxDecoration(color: AppColors.greyLight),
-                child: Image.network(
-                  destination.imageUrl,
-                  width: double.infinity,
-                  height: 160,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) {
-                    return const Center(child: Icon(Icons.broken_image));
-                  },
-                ),
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(Icons.broken_image, size: 50),
+                  );
+                },
               ),
             ),
             Padding(
