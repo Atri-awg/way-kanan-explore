@@ -19,8 +19,7 @@ class _DestinationListPageState extends State<DestinationListPage> {
 
   bool isLoading = true;
 
-  final TextEditingController searchController =
-      TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -40,70 +39,64 @@ class _DestinationListPageState extends State<DestinationListPage> {
 
   void searchDestination(String keyword) {
     setState(() {
-      filteredDestinations =
-          allDestinations.where((destination) {
-        return destination.name
-            .toLowerCase()
-            .contains(keyword.toLowerCase());
+      filteredDestinations = allDestinations.where((destination) {
+        return destination.name.toLowerCase().contains(keyword.toLowerCase());
       }).toList();
     });
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Destinations')),
-      body: FutureBuilder<List<Destination>>(
-        future: service.getDestinations(),
-        builder: (context, snapshot) {
-          print("STATE = ${snapshot.connectionState}");
-
-          if (snapshot.hasData) {
-            print("DATA = ${snapshot.data!.length}");
-          }
-
-          if (snapshot.hasError) {
-            print("ERROR = ${snapshot.error}");
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
-          }
-
-          final destinations = snapshot.data ?? [];
-          print(destinations.first.name);
-          print(destinations.first.toJson());
-
-          return ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 12.0,
-            ),
-            itemCount: destinations.length,
-            itemBuilder: (context, index) {
-              final destination = destinations[index];
-
-              return DestinationCard(
-                destination: destination,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          DestinationDetailPage(destination: destination),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+              children: [
+                // Search Bar
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: TextField(
+                    controller: searchController,
+                    onChanged: searchDestination,
+                    decoration: InputDecoration(
+                      hintText: 'Cari destinasi...',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
-                  );
-                },
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(height: 8);
-            },
-          );
-        },
-      ),
+                  ),
+                ),
+
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    itemCount: filteredDestinations.length,
+                    itemBuilder: (context, index) {
+                      final destination = filteredDestinations[index];
+
+                      return DestinationCard(
+                        destination: destination,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => DestinationDetailPage(
+                                destination: destination,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
