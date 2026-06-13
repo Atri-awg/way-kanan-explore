@@ -1,80 +1,18 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { NotificationController } from './notification.controller';
 
-import { NotificationService } from './notification.service';
+describe('NotificationController', () => {
+  let controller: NotificationController;
 
-import { CreateNotificationDto } from './dto/create-notification.dto';
-import { UpdateNotificationDto } from './dto/update-notification.dto';
-import { QueryNotificationDto } from './dto/query-notification.dto';
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [NotificationController],
+    }).compile();
 
-@Controller('notification')
-export class NotificationController {
-  constructor(private readonly notificationService: NotificationService) {}
+    controller = module.get<NotificationController>(NotificationController);
+  });
 
-  @Post()
-  create(
-    @Body()
-    createNotificationDto: CreateNotificationDto,
-  ) {
-    return this.notificationService.create(createNotificationDto);
-  }
-
-  @Get()
-  findAll(
-    @Query()
-    query: QueryNotificationDto,
-  ) {
-    return this.notificationService.findAll(query);
-  }
-
-  @Get(':id')
-  findOne(
-    @Param('id')
-    id: string,
-  ) {
-    return this.notificationService.findOne(id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id')
-    id: string,
-
-    @Body()
-    updateNotificationDto: UpdateNotificationDto,
-  ) {
-    return this.notificationService.update(id, updateNotificationDto);
-  }
-
-  @Patch(':id/read')
-  markAsRead(
-    @Param('id')
-    id: string,
-  ) {
-    return this.notificationService.markAsRead(id);
-  }
-
-  @Delete(':id')
-  remove(
-    @Param('id')
-    id: string,
-  ) {
-    return this.notificationService.remove(id);
-  }
-
-  @Patch(':id/restore')
-  restore(
-    @Param('id')
-    id: string,
-  ) {
-    return this.notificationService.restore(id);
-  }
-}
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
