@@ -69,5 +69,27 @@ export class ReviewService {
     };
   }
 
-  
+  async findOne(id: string) {
+    const data = await this.prisma.review.findFirst({
+      where: {
+        id,
+        deletedAt: null,
+      },
+    });
+
+    if (!data) {
+      throw new NotFoundException({
+        success: false,
+        message: 'Review tidak ditemukan',
+      });
+    }
+
+    return {
+      success: true,
+      metadata: {
+        status: HttpStatus.OK,
+      },
+      data,
+    };
+  }
 }
