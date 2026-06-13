@@ -80,10 +80,6 @@ class _DestinationListPageState extends State<DestinationListPage> {
         selected: isSelected,
         label: Text(category),
         onSelected: (_) {
-          setState(() {
-            selectedCategory = category;
-          });
-
           filterCategory(category);
         },
       ),
