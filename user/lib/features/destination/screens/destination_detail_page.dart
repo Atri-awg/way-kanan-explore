@@ -56,7 +56,7 @@ class DestinationDetailPage extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    destination.reviewsCount.toStringAsFixed(1),
+                    destination.reviewsCount.toString(),
                     style: TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                   const Spacer(),
@@ -92,7 +92,7 @@ class DestinationDetailPage extends StatelessWidget {
                           bottomLeft: Radius.circular(16),
                         ),
                         child: Image.asset(
-                          'assets/images/air_terjun_tirta_haji.jpg',
+                          destination.galleries[0].imageUrl,
                           fit: BoxFit.cover,
                           height: double.infinity,
                         ),
@@ -109,7 +109,7 @@ class DestinationDetailPage extends StatelessWidget {
                                 topRight: Radius.circular(16),
                               ),
                               child: Image.asset(
-                                'assets/images/bukit_barisan.jpg',
+                                destination.galleries[0].imageUrl,
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),
@@ -122,7 +122,7 @@ class DestinationDetailPage extends StatelessWidget {
                                 bottomRight: Radius.circular(16),
                               ),
                               child: Image.asset(
-                                'assets/images/sungai_way_besai.jpg',
+                                destination.galleries[0].imageUrl,
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),
@@ -293,44 +293,41 @@ class DestinationDetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-                    const Text(
-                      'Galeri',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+              const Text(
+                'Galeri',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: 120,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: destination.galleries.length,
+                  itemBuilder: (context, index) {
+                    final gallery = destination.galleries[index];
+
+                    return Container(
+                      width: 150,
+                      margin: const EdgeInsets.only(right: 12),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          gallery.imageUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) {
+                            return Container(
+                              color: Colors.grey.shade300,
+                              child: const Icon(Icons.image),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    SizedBox(
-                      height: 120,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: destination.galleries.length,
-                        itemBuilder: (context, index) {
-                          final gallery = destination.galleries[index];
-
-                          return Container(
-                            width: 150,
-                            margin: const EdgeInsets.only(right: 12),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                gallery.imageUrl,
-                                fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) {
-                                  return Container(
-                                    color: Colors.grey.shade300,
-                                    child: const Icon(Icons.image),
-                                  );
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    );
+                  },
+                ),
+              ),
               const SizedBox(height: 28),
 
               // --- 6. Destination Details Tags ---
@@ -352,14 +349,15 @@ class DestinationDetailPage extends StatelessWidget {
                   _buildTag(Icons.hiking_outlined, 'Outdoors'),
                   _buildTag(Icons.family_restroom_outlined, 'Family Friendly'),
                 ],
-              ), const SizedBox(height: 24),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: destination.categories.map((category) {
-                        return Chip(label: Text(category.name));
-                      }).toList(),
-                    ),
+              ),
+              const SizedBox(height: 24),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: destination.categories.map((category) {
+                  return Chip(label: Text(category.name));
+                }).toList(),
+              ),
               const SizedBox(height: 32),
 
               // --- 7. Reviews Section ---

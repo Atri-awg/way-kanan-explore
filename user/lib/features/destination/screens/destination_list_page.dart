@@ -50,6 +50,33 @@ class _DestinationListPageState extends State<DestinationListPage> {
     });
   }
 
+  void filterCategory(String category) {
+    if (category == "All") {
+      setState(() {
+        filteredDestinations = allDestinations;
+      });
+      return;
+    }
+
+    setState(() {
+      filteredDestinations = allDestinations.where((destination) {
+        return destination.categories.any((c) => c.name == category);
+      }).toList();
+    });
+  }
+
+  Widget _buildCategoryChip(String category) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: ActionChip(
+        label: Text(category),
+        onPressed: () {
+          filterCategory(category);
+        },
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Destinations')),
@@ -69,6 +96,24 @@ class _DestinationListPageState extends State<DestinationListPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ), // Menyelaraskan jarak kiri-kanan dengan Search Bar
+                  child: SizedBox(
+                    height: 50,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _buildCategoryChip("All"),
+                        _buildCategoryChip("Nature"),
+                        _buildCategoryChip("Waterfall"),
+                        _buildCategoryChip("Adventure"),
+                      ],
                     ),
                   ),
                 ),
