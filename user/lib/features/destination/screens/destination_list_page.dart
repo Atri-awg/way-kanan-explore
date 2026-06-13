@@ -128,31 +128,39 @@ class _DestinationListPageState extends State<DestinationListPage> {
                 ),
 
                 Expanded(
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    itemCount: filteredDestinations.length,
-                    itemBuilder: (context, index) {
-                      final destination = filteredDestinations[index];
+                  child: filteredDestinations.isEmpty
+                      ? const Center(
+                          child: Text(
+                            'Tidak ada destinasi ditemukan',
+                            style: TextStyle(fontSize: 16, color: Colors.grey),
+                          ),
+                        )
+                      : ListView.separated(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          itemCount: filteredDestinations.length,
+                          itemBuilder: (context, index) {
+                            final destination = filteredDestinations[index];
 
-                      return DestinationCard(
-                        destination: destination,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => DestinationDetailPage(
-                                destination: destination,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
-                  ),
+                            return DestinationCard(
+                              destination: destination,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => DestinationDetailPage(
+                                      destination: destination,
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 12),
+                        ),
                 ),
               ],
             ),
