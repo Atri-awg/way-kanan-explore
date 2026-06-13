@@ -11,5 +11,19 @@ import { QueryReviewDto } from './dto/query-review.dto';
 @Injectable()
 export class ReviewService {
   constructor(private readonly prisma: PrismaService) {}
-  
+
+  async create(createReviewDto: CreateReviewDto) {
+    const data = await this.prisma.review.create({
+      data: createReviewDto,
+    });
+
+    return {
+      success: true,
+      message: 'Review berhasil dibuat',
+      metadata: {
+        status: HttpStatus.CREATED,
+      },
+      data,
+    };
+  }
 }
