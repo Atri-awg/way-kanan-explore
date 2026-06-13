@@ -178,29 +178,20 @@ export class ReviewService {
     };
   }
 
-  async getAverageRating(
-    destinationId: string,
-  ) {
-    const reviews =
-      await this.prisma.review.findMany({
-        where: {
-          destinationId,
-          deletedAt: null,
-        },
-      });
+  async getAverageRating(destinationId: string) {
+    const reviews = await this.prisma.review.findMany({
+      where: {
+        destinationId,
+        deletedAt: null,
+      },
+    });
 
-    const totalReview =
-      reviews.length;
+    const totalReview = reviews.length;
 
     const averageRating =
       totalReview > 0
         ? reviews.reduce(
-            (
-              sum: number,
-              review: Review,
-            ) =>
-              sum +
-              review.rating,
+            (sum: number, review: Review) => sum + review.rating,
             0,
           ) / totalReview
         : 0;
@@ -212,18 +203,9 @@ export class ReviewService {
       },
       data: {
         destinationId,
-        average_rating:
-          Number(
-            averageRating.toFixed(
-              1,
-            ),
-          ),
-        total_review:
-          totalReview,
+        average_rating: Number(averageRating.toFixed(1)),
+        total_review: totalReview,
       },
     };
   }
-}
-
-  
 }
