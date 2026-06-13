@@ -13,7 +13,7 @@ export class ReviewService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createReviewDto: CreateReviewDto) {
-    const data = await this.prisma.review.create({
+    const data: Review = await this.prisma.review.create({
       data: createReviewDto,
     });
 
@@ -42,20 +42,18 @@ export class ReviewService {
       where.destinationId = query.destinationId;
     }
 
-    const [data, total] = await Promise.all([
-      this.prisma.review.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: {
-          createdAt: 'desc',
-        },
-      }),
+    const data: Review[] = await this.prisma.review.findMany({
+      where,
+      skip,
+      take: limit,
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
 
-      this.prisma.review.count({
-        where,
-      }),
-    ]);
+    const total: number = await this.prisma.review.count({
+      where,
+    });
 
     return {
       success: true,
@@ -70,7 +68,7 @@ export class ReviewService {
   }
 
   async findOne(id: string) {
-    const data = await this.prisma.review.findFirst({
+    const data: Review | null = await this.prisma.review.findFirst({
       where: {
         id,
         deletedAt: null,
@@ -94,7 +92,7 @@ export class ReviewService {
   }
 
   async update(id: string, updateReviewDto: UpdateReviewDto) {
-    const review = await this.prisma.review.findUnique({
+    const review: Review | null = await this.prisma.review.findUnique({
       where: { id },
     });
 
@@ -105,7 +103,7 @@ export class ReviewService {
       });
     }
 
-    const data = await this.prisma.review.update({
+    const data: Review = await this.prisma.review.update({
       where: { id },
       data: updateReviewDto,
     });
@@ -121,7 +119,7 @@ export class ReviewService {
   }
 
   async remove(id: string) {
-    const review = await this.prisma.review.findUnique({
+    const review: Review | null = await this.prisma.review.findUnique({
       where: { id },
     });
 
@@ -150,7 +148,7 @@ export class ReviewService {
   }
 
   async restore(id: string) {
-    const review = await this.prisma.review.findUnique({
+    const review: Review | null = await this.prisma.review.findUnique({
       where: { id },
     });
 
@@ -179,7 +177,7 @@ export class ReviewService {
   }
 
   async getAverageRating(destinationId: string) {
-    const reviews = await this.prisma.review.findMany({
+    const reviews: Review[] = await this.prisma.review.findMany({
       where: {
         destinationId,
         deletedAt: null,
@@ -190,10 +188,7 @@ export class ReviewService {
 
     const averageRating =
       totalReview > 0
-        ? reviews.reduce(
-            (sum: number, review: Review) => sum + review.rating,
-            0,
-          ) / totalReview
+        ? reviews.reduce((sum, review) => sum + review.rating, 0) / totalReview
         : 0;
 
     return {
