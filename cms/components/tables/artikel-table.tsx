@@ -21,14 +21,18 @@ export default function ArtikelTable() {
     const getArtikel = async () => {
       try {
         const res = await fetch(
-          "http://localhost:3005/api/articles"
+          `${process.env.NEXT_PUBLIC_ARTICLE_API}/api/article`
         );
+
+        if (!res.ok) {
+          throw new Error("Gagal mengambil data artikel");
+        }
 
         const result = await res.json();
 
         setArtikel(result.data);
       } catch (error) {
-        console.error("Gagal mengambil artikel:", error);
+        console.error("Error:", error);
       } finally {
         setLoading(false);
       }
@@ -40,7 +44,7 @@ export default function ArtikelTable() {
   if (loading) {
     return (
       <div className="py-6 text-center">
-        Loading...
+        Loading artikel...
       </div>
     );
   }
@@ -50,27 +54,27 @@ export default function ArtikelTable() {
       <table className="w-full">
         <thead>
           <tr className="border-b">
-            <th className="text-left py-3">
+            <th className="p-3 text-left">
               Judul
             </th>
 
-            <th className="text-left py-3">
+            <th className="p-3 text-left">
               Penulis
             </th>
 
-            <th className="text-center py-3">
+            <th className="p-3 text-center">
               Unggulan
             </th>
 
-            <th className="text-center py-3">
+            <th className="p-3 text-center">
               Status
             </th>
 
-            <th className="text-left py-3">
+            <th className="p-3 text-left">
               Dibuat
             </th>
 
-            <th className="text-center py-3">
+            <th className="p-3 text-center">
               Aksi
             </th>
           </tr>
@@ -93,17 +97,17 @@ export default function ArtikelTable() {
                 className="border-b hover:bg-gray-50"
               >
                 {/* Judul */}
-                <td className="py-4">
+                <td className="p-3">
                   {item.title}
                 </td>
 
-                {/* Author */}
-                <td>
+                {/* Penulis */}
+                <td className="p-3">
                   {item.author || "-"}
                 </td>
 
                 {/* Featured */}
-                <td className="text-center">
+                <td className="p-3 text-center">
                   {item.featured ? (
                     <Star
                       size={18}
@@ -115,7 +119,7 @@ export default function ArtikelTable() {
                 </td>
 
                 {/* Status */}
-                <td className="text-center">
+                <td className="p-3 text-center">
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       item.status === "PUBLISHED"
@@ -129,19 +133,21 @@ export default function ArtikelTable() {
                   </span>
                 </td>
 
-                {/* Created */}
-                <td>
-                  {new Date(
-                    item.createdAt
-                  ).toLocaleDateString("id-ID", {
-                    day: "2-digit",
-                    month: "long",
-                    year: "numeric",
-                  })}
+                {/* Tanggal dibuat */}
+                <td className="p-3">
+                  {new Date(item.createdAt)
+                    .toLocaleDateString(
+                      "id-ID",
+                      {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      }
+                    )}
                 </td>
 
-                {/* Action */}
-                <td>
+                {/* Aksi */}
+                <td className="p-3">
                   <div className="flex justify-center gap-3">
                     <Link
                       href={`/artikel/edit/${item.id}`}
