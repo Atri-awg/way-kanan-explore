@@ -215,6 +215,14 @@ class DestinationDetailPage extends StatelessWidget {
                         },
                       ),
                     ),
+                    const SizedBox(height: 24),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: destination.categories.map((category) {
+                        return Chip(label: Text(category.name));
+                      }).toList(),
+                    ),
                     const SizedBox(height: 16),
                     Row(
                       children: [
