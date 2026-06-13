@@ -6,6 +6,14 @@ class DestinationDetailPage extends StatelessWidget {
 
   const DestinationDetailPage({super.key, required this.destination});
 
+  String getMainImage() {
+    if (destination.galleries.isNotEmpty) {
+      return destination.galleries.first.imageUrl;
+    }
+
+    return 'assets/images/default_destination.jpg';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +100,7 @@ class DestinationDetailPage extends StatelessWidget {
                           bottomLeft: Radius.circular(16),
                         ),
                         child: Image.asset(
-                          destination.galleries[0].imageUrl,
+                          getMainImage(),
                           fit: BoxFit.cover,
                           height: double.infinity,
                         ),
@@ -109,7 +117,7 @@ class DestinationDetailPage extends StatelessWidget {
                                 topRight: Radius.circular(16),
                               ),
                               child: Image.asset(
-                                destination.galleries[0].imageUrl,
+                                getMainImage(),
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),
@@ -122,7 +130,7 @@ class DestinationDetailPage extends StatelessWidget {
                                 bottomRight: Radius.circular(16),
                               ),
                               child: Image.asset(
-                                destination.galleries[0].imageUrl,
+                                getMainImage(),
                                 fit: BoxFit.cover,
                                 width: double.infinity,
                               ),
@@ -343,19 +351,8 @@ class DestinationDetailPage extends StatelessWidget {
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
-                children: [
-                  _buildTag(Icons.park_outlined, 'Nature'),
-                  _buildTag(Icons.water_drop_outlined, 'Waterfall'),
-                  _buildTag(Icons.hiking_outlined, 'Outdoors'),
-                  _buildTag(Icons.family_restroom_outlined, 'Family Friendly'),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
                 children: destination.categories.map((category) {
-                  return Chip(label: Text(category.name));
+                  return _buildTag(Icons.category, category.name);
                 }).toList(),
               ),
               const SizedBox(height: 32),
