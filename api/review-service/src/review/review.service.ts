@@ -92,4 +92,31 @@ export class ReviewService {
       data,
     };
   }
+
+  async update(id: string, updateReviewDto: UpdateReviewDto) {
+    const review = await this.prisma.review.findUnique({
+      where: { id },
+    });
+
+    if (!review) {
+      throw new NotFoundException({
+        success: false,
+        message: 'Review tidak ditemukan',
+      });
+    }
+
+    const data = await this.prisma.review.update({
+      where: { id },
+      data: updateReviewDto,
+    });
+
+    return {
+      success: true,
+      message: 'Review berhasil diperbarui',
+      metadata: {
+        status: HttpStatus.OK,
+      },
+      data,
+    };
+  }
 }
