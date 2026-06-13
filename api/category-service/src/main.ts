@@ -1,11 +1,16 @@
+import 'reflect-metadata';
+
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import 'reflect-metadata';
 
 import { AppModule } from './app.module';
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors();
+
+  app.setGlobalPrefix('api');
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -17,4 +22,5 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3002);
 }
-bootstrap();
+
+void bootstrap();
