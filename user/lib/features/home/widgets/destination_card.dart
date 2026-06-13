@@ -15,7 +15,7 @@ class DestinationCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(right: 16),
+        // margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(12),
