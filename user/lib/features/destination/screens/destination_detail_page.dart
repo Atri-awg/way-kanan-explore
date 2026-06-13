@@ -128,14 +128,10 @@ class DestinationDetailPage extends StatelessWidget {
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(16),
                               ),
-
-                              child: Hero(
-                                tag: 'destination-img-${destination.id}',
-                                child: Image.asset(
-                                  getMainImage(),
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                ),
+                              child: Image.asset(
+                                getMainImage(),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
                               ),
                             ),
                           ),
@@ -145,13 +141,10 @@ class DestinationDetailPage extends StatelessWidget {
                               borderRadius: const BorderRadius.only(
                                 bottomRight: Radius.circular(16),
                               ),
-                              child: Hero(
-                                tag: 'destination-img-${destination.id}',
-                                child: Image.asset(
-                                  getMainImage(),
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                ),
+                              child: Image.asset(
+                                getMainImage(),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
                               ),
                             ),
                           ),
@@ -272,26 +265,33 @@ class DestinationDetailPage extends StatelessWidget {
                         height: 120,
                         color: Colors.grey.shade200,
                         // Menyimulasikan peta dengan background logo blur / placeholder
-                        child: const Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Icon(
-                              Icons.map_outlined,
-                              size: 48,
-                              color: Colors.grey,
-                            ),
-                            Positioned(
-                              bottom: 8,
-                              child: Text(
-                                'View Map',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
+                        child: GestureDetector(
+                          onTap: openMap,
+                          child: Container(
+                            height: 120,
+                            color: Colors.grey.shade200,
+                            child: const Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Icon(
+                                  Icons.map_outlined,
+                                  size: 48,
+                                  color: Colors.grey,
                                 ),
-                              ),
+                                Positioned(
+                                  bottom: 8,
+                                  child: Text(
+                                    'View Map',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
