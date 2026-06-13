@@ -1,72 +1,184 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import api from "@/lib/api";
+
 export default function LoginPage() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await api.post("/auth/cms/login", {
+        email,
+        password,
+      });
+
+      const data = response.data;
+
+      // Simpan token dan data admin
+      localStorage.setItem(
+        "access_token",
+        data.access_token
+      );
+
+      localStorage.setItem(
+        "refresh_token",
+        data.refresh_token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      // Pindah ke dashboard
+      router.push("/dashboard");
+
+    } catch (err: any) {
+
+      // Error dari NestJS
+      if (err.response) {
+        setError(err.response.data.message);
+      } else {
+        setError("Tidak dapat terhubung ke server");
+      }
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-waykanan-bg relative overflow-hidden">
-      {/* Ornamen Latar Belakang (Opsional untuk estetika) */}
+
+      {/* Background */}
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-waykanan-dark/5 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-waykanan-orange/10 rounded-full blur-3xl"></div>
 
+
       <div className="w-full max-w-md z-10 mx-4">
-        {/* Logo Section */}
+
+        {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold italic text-waykanan-dark tracking-tight">
             Waykanan <span className="text-waykanan-orange">EXPLORE</span>
           </h1>
+
           <p className="text-gray-500 mt-2 text-sm uppercase tracking-widest">
             Content Management System
           </p>
         </div>
 
-        <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Selamat Datang</h2>
-          <p className="text-gray-500 text-sm mb-8">Silakan masuk untuk mengelola konten Anda.</p>
 
-          <form className="space-y-5">
+        {/* Card */}
+        <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
+
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            Selamat Datang
+          </h2>
+
+          <p className="text-gray-500 text-sm mb-8">
+            Silakan masuk untuk mengelola konten Anda.
+          </p>
+
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-5 p-3 rounded-xl bg-red-100 text-red-600 text-sm">
+              {error}
+            </div>
+          )}
+
+
+          {/* Form */}
+          <form
+            className="space-y-5"
+            onSubmit={handleLogin}
+          >
+
+            {/* Email */}
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-700">
                 Email Address
               </label>
+
               <input
                 type="email"
                 placeholder="admin@waykanan.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-waykanan-dark/20 focus:border-waykanan-dark transition-all"
               />
             </div>
 
+
+            {/* Password */}
             <div>
-              <div className="flex justify-between mb-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <a href="#" className="text-xs text-waykanan-orange hover:underline font-semibold">
-                  Lupa Password?
-                </a>
-              </div>
+              <label className="block mb-2 text-sm font-medium text-gray-700">
+                Password
+              </label>
+
               <input
                 type="password"
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-waykanan-dark/20 focus:border-waykanan-dark transition-all"
               />
             </div>
 
-            <div className="flex items-center space-x-2 pb-2">
-              <input type="checkbox" id="remember" className="rounded border-gray-300 text-waykanan-dark focus:ring-waykanan-dark" />
-              <label htmlFor="remember" className="text-xs text-gray-600 cursor-pointer">Ingat saya di perangkat ini</label>
-            </div>
 
+            {/* Tombol Login */}
             <button
               type="submit"
-              className="w-full bg-waykanan-dark hover:bg-waykanan-light text-black font-semibold py-3 rounded-xl shadow-lg shadow-waykanan-dark/20 transition-all active:scale-[0.98]"
+              disabled={loading}
+              className="
+                w-full 
+                bg-waykanan-dark
+                hover:bg-waykanan-light
+                text-black 
+                font-semibold 
+                py-3 
+                rounded-xl 
+                shadow-lg 
+                shadow-waykanan-dark/20
+                transition-all
+                disabled:opacity-50
+                disabled:cursor-not-allowed
+              "
             >
-              Masuk ke Dashboard
+              {loading ? "Sedang masuk..." : "Masuk ke Dashboard"}
             </button>
+
           </form>
+
         </div>
 
-        {/* Footer Login */}
+
+        {/* Footer */}
         <p className="text-center text-gray-400 text-xs mt-8">
           © 2026 Admin Waykanan. All rights reserved.
         </p>
+
       </div>
+
     </div>
   );
 }

@@ -127,6 +127,20 @@ class _DestinationListPageState extends State<DestinationListPage> {
                   ),
                 ),
 
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "${filteredDestinations.length} destinasi ditemukan",
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+
                 Expanded(
                   child: filteredDestinations.isEmpty
                       ? const Center(
