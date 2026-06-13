@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import api from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -21,49 +22,41 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_AUTH_API}/auth/cms/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await api.post("/auth/cms/login", {
+        email,
+        password,
+      });
 
-      const result = await response.json();
+      const data = response.data;
 
-      if (!response.ok) {
-        throw new Error(
-          result.message || "Login gagal"
-        );
-      }
-
-      // Simpan token dan data user
+      // Simpan token dan data admin
       localStorage.setItem(
         "access_token",
-        result.access_token
+        data.access_token
       );
 
       localStorage.setItem(
         "refresh_token",
-        result.refresh_token
+        data.refresh_token
       );
 
       localStorage.setItem(
         "user",
-        JSON.stringify(result.user)
+        JSON.stringify(data.user)
       );
 
-      // Redirect ke dashboard CMS
+      // Pindah ke dashboard
       router.push("/dashboard");
 
     } catch (err: any) {
-      setError(err.message);
+
+      // Error dari NestJS
+      if (err.response) {
+        setError(err.response.data.message);
+      } else {
+        setError("Tidak dapat terhubung ke server");
+      }
+
     } finally {
       setLoading(false);
     }
@@ -73,9 +66,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-waykanan-bg relative overflow-hidden">
 
-      {/* Background Ornament */}
+      {/* Background */}
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-waykanan-dark/5 rounded-full blur-3xl"></div>
-
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-waykanan-orange/10 rounded-full blur-3xl"></div>
 
 
@@ -83,22 +75,17 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div className="text-center mb-8">
-
           <h1 className="text-3xl font-bold italic text-waykanan-dark tracking-tight">
-            Waykanan{" "}
-            <span className="text-waykanan-orange">
-              EXPLORE
-            </span>
+            Waykanan <span className="text-waykanan-orange">EXPLORE</span>
           </h1>
 
           <p className="text-gray-500 mt-2 text-sm uppercase tracking-widest">
             Content Management System
           </p>
-
         </div>
 
 
-        {/* Card Login */}
+        {/* Card */}
         <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
 
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -111,16 +98,14 @@ export default function LoginPage() {
 
 
           {/* Error Message */}
-          {
-            error && (
-              <div className="mb-5 p-3 rounded-xl bg-red-100 text-red-600 text-sm">
-                {error}
-              </div>
-            )
-          }
+          {error && (
+            <div className="mb-5 p-3 rounded-xl bg-red-100 text-red-600 text-sm">
+              {error}
+            </div>
+          )}
 
 
-          {/* Form Login */}
+          {/* Form */}
           <form
             className="space-y-5"
             onSubmit={handleLogin}
@@ -134,11 +119,9 @@ export default function LoginPage() {
 
               <input
                 type="email"
-                value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
                 placeholder="admin@waykanan.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-waykanan-dark/20 focus:border-waykanan-dark transition-all"
               />
@@ -147,43 +130,22 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-
               <label className="block mb-2 text-sm font-medium text-gray-700">
                 Password
               </label>
 
               <input
                 type="password"
-                value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-waykanan-dark/20 focus:border-waykanan-dark transition-all"
               />
-
             </div>
 
 
-            {/* Remember Me */}
-            <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="remember"
-                className="rounded border-gray-300 text-waykanan-dark"
-              />
-
-              <label
-                htmlFor="remember"
-                className="text-xs text-gray-600 cursor-pointer"
-              >
-                Ingat saya di perangkat ini
-              </label>
-            </div>
-
-
-            {/* Submit */}
+            {/* Tombol Login */}
             <button
               type="submit"
               disabled={loading}
@@ -191,25 +153,18 @@ export default function LoginPage() {
                 w-full 
                 bg-waykanan-dark
                 hover:bg-waykanan-light
-                text-black
-                font-semibold
-                py-3
-                rounded-xl
-                shadow-lg
+                text-black 
+                font-semibold 
+                py-3 
+                rounded-xl 
+                shadow-lg 
                 shadow-waykanan-dark/20
                 transition-all
-                active:scale-[0.98]
                 disabled:opacity-50
                 disabled:cursor-not-allowed
               "
             >
-
-              {
-                loading
-                  ? "Sedang masuk..."
-                  : "Masuk ke Dashboard"
-              }
-
+              {loading ? "Sedang masuk..." : "Masuk ke Dashboard"}
             </button>
 
           </form>
