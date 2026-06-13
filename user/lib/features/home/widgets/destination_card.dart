@@ -17,8 +17,7 @@ class DestinationCard extends StatelessWidget {
         width: double.infinity,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          color: Colors.red,
-          // color: AppColors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
