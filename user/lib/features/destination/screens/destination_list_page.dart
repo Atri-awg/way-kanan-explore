@@ -17,6 +17,9 @@ class _DestinationListPageState extends State<DestinationListPage> {
   List<Destination> allDestinations = [];
   List<Destination> filteredDestinations = [];
 
+  String selectedCategory = "All";
+  String searchKeyword = "";
+
   bool isLoading = true;
 
   final TextEditingController searchController = TextEditingController();
@@ -66,11 +69,18 @@ class _DestinationListPageState extends State<DestinationListPage> {
   }
 
   Widget _buildCategoryChip(String category) {
+    final isSelected = selectedCategory == category;
+
     return Padding(
       padding: const EdgeInsets.only(right: 8),
-      child: ActionChip(
+      child: FilterChip(
+        selected: isSelected,
         label: Text(category),
-        onPressed: () {
+        onSelected: (_) {
+          setState(() {
+            selectedCategory = category;
+          });
+
           filterCategory(category);
         },
       ),
