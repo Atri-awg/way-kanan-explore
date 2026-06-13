@@ -54,11 +54,11 @@ export default function KategoriTable() {
   const handleDelete = async (id: number) => {
     try {
       const res = await fetch(
-        `http://localhost:3002/api/kategori/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      `${process.env.NEXT_PUBLIC_KATEGORI_API}/api/kategori/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
       if (!res.ok) {
         toast.error("Gagal menghapus kategori");
