@@ -17,7 +17,7 @@ export default function EditKategoriPage() {
     nama: "",
   });
 
-  // 🔥 slug generator
+  // slug generator
   const generateSlug = (text: string) =>
     text
       .toLowerCase()
@@ -25,7 +25,7 @@ export default function EditKategoriPage() {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
 
-  // 🔥 ambil data detail kategori
+  // ambil data detail kategori
   useEffect(() => {
     const getKategori = async () => {
       try {
@@ -51,7 +51,7 @@ export default function EditKategoriPage() {
     if (params.id) getKategori();
   }, [params.id]);
 
-  // 🔥 handle input
+  // handle input
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -63,7 +63,7 @@ export default function EditKategoriPage() {
     }));
   };
 
-  // 🔥 submit update
+  // submit update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -103,7 +103,7 @@ export default function EditKategoriPage() {
     }
   };
 
-  // 🔥 loading state
+  // loading state
   if (fetching) {
     return (
       <div className="p-6 text-center">

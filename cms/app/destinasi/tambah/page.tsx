@@ -27,7 +27,7 @@ export default function TambahDestinasiPage() {
     status: true,
   });
 
-  // 🔥 FETCH KATEGORI (ONLY ONCE)
+  //  FETCH KATEGORI
   useEffect(() => {
     const fetchKategori = async () => {
       try {
@@ -46,7 +46,7 @@ export default function TambahDestinasiPage() {
     fetchKategori();
   }, []);
 
-  // 🔥 handle input
+  //  handle input
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -60,7 +60,7 @@ export default function TambahDestinasiPage() {
     }));
   };
 
-  // 🔥 slug generator
+  // slug generator
   const generateSlug = (text: string) =>
     text
       .toLowerCase()
@@ -68,7 +68,7 @@ export default function TambahDestinasiPage() {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
 
-  // 🔥 submit
+  // submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -104,7 +104,7 @@ export default function TambahDestinasiPage() {
     }
   };
 
-  // 🔥 reset form
+  //  reset form
   const handleReset = () => {
     setFormData({
       name: "",

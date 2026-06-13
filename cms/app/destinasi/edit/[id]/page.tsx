@@ -30,7 +30,7 @@ export default function EditDestinasiPage() {
     status: true,
   });
 
-  // 🔥 FETCH DETAIL DESTINASI
+  // FETCH DETAIL DESTINASI
   useEffect(() => {
     const getDestinasi = async () => {
       try {
@@ -58,7 +58,7 @@ export default function EditDestinasiPage() {
     if (params.id) getDestinasi();
   }, [params.id]);
 
-  // 🔥 FETCH KATEGORI (SAMA SEPERTI TAMBAH PAGE)
+  // FETCH KATEGORI (SAMA SEPERTI TAMBAH PAGE)
   useEffect(() => {
     const getKategori = async () => {
       try {
@@ -89,7 +89,7 @@ export default function EditDestinasiPage() {
     }));
   };
 
-  // 🔥 SUBMIT UPDATE
+  // SUBMIT UPDATE
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -152,7 +152,7 @@ export default function EditDestinasiPage() {
           />
         </div>
 
-        {/* KATEGORI (FIXED - NO HARDCODE) */}
+        {/* KATEGORI */}
         <div>
           <label className="mb-2 block font-medium">
             Kategori

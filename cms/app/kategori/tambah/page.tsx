@@ -16,7 +16,7 @@ export default function TambahKategoriPage() {
     slug: "",
   });
 
-  // 🔥 auto generate slug
+  // auto generate slug
   const generateSlug = (text: string) =>
     text
       .toLowerCase()
@@ -24,7 +24,7 @@ export default function TambahKategoriPage() {
       .replace(/\s+/g, "-")
       .replace(/[^\w-]+/g, "");
 
-  // 🔥 handle input
+  // handle input
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -38,7 +38,7 @@ export default function TambahKategoriPage() {
     }));
   };
 
-  // 🔥 submit
+  // submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
