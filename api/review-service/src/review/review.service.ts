@@ -26,4 +26,48 @@ export class ReviewService {
       data,
     };
   }
+
+  async findAll(query: QueryReviewDto) {
+    const page = Number(query.page ?? 1);
+
+    const limit = Number(query.limit ?? 10);
+
+    const skip = (page - 1) * limit;
+
+    const where: Prisma.ReviewWhereInput = {
+      deletedAt: null,
+    };
+
+    if (query.destinationId) {
+      where.destinationId = query.destinationId;
+    }
+
+    const [data, total] = await Promise.all([
+      this.prisma.review.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+
+      this.prisma.review.count({
+        where,
+      }),
+    ]);
+
+    return {
+      success: true,
+      metadata: {
+        status: HttpStatus.OK,
+        total_data: total,
+        page,
+        limit,
+      },
+      data,
+    };
+  }
+
+  
 }
