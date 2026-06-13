@@ -4,6 +4,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const API_DESTINASI = "http://localhost:3003/api/destinasi";
 const API_KATEGORI = "http://localhost:3002/api/kategori";
@@ -70,9 +81,6 @@ export default function DestinasiTable() {
     return found ? found.nama : "-";
   };
   const handleDelete = async (id: number) => {
-    const confirmDelete = confirm("Yakin ingin menghapus destinasi ini?");
-    if (!confirmDelete) return;
-
     try {
       const res = await fetch(`${API_DESTINASI}/${id}`, {
         method: "DELETE",
@@ -144,12 +152,49 @@ export default function DestinasiTable() {
                     <Pencil size={18} />
                   </Link>
 
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="text-red-500"
-                  >
-                    <Trash2 size={18} />
-                  </button>
+                  {/* Hapus */}
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <button
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </AlertDialogTrigger>
+
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Hapus Kategori?
+                        </AlertDialogTitle>
+
+                        <AlertDialogDescription>
+                          Apakah Anda yakin ingin menghapus kategori
+                          <span className="font-semibold">
+                            {" "}
+                            {item.name}
+                          </span>
+                          ? Data yang sudah dihapus tidak dapat
+                          dikembalikan.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>
+                          Batal
+                        </AlertDialogCancel>
+
+                        <AlertDialogAction
+                          onClick={() =>
+                            handleDelete(item.id)
+                          }
+                          className="bg-red-600 hover:bg-red-700"
+                        >
+                          Hapus
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               </td>
             </tr>
