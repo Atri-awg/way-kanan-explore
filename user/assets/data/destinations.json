@@ -2,7 +2,7 @@
   {
     "id": "dest-001",
     "name": "Air Terjun Putri Malu",
-    "imageUrl": "https://storage.waykananexplore.com/images/putri_malu_1.jpg",
+    "imageUrl": "assets/images/air_terjun_tirta_haji.jpg",
     "location": {
       "address": "Juku Batu, Banjit, Way Kanan, Lampung",
       "latitude": -4.6851,
@@ -24,14 +24,14 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-001a", "imageUrl": "https://storage.waykananexplore.com/images/putri_malu_1.jpg", "isPrimary": true },
-      { "id": "gal-001b", "imageUrl": "https://storage.waykananexplore.com/images/putri_malu_2.jpg", "isPrimary": false }
+      { "id": "gal-001a", "imageUrl": "assets/images/putri_malu_1.jpg", "isPrimary": true },
+      { "id": "gal-001b", "imageUrl": "assets/images/putri_malu_2.jpg", "isPrimary": false }
     ]
   },
   {
     "id": "dest-002",
     "name": "Curup Gangsa",
-    "imageUrl": "https://storage.waykananexplore.com/images/curup_gangsa_1.jpg",
+    "imageUrl": "assets/images/curup_gangsa_1.jpg",
     "location": {
       "address": "Tanjung Raya, Way Tuba, Way Kanan, Lampung",
       "latitude": -4.5123,
@@ -54,13 +54,13 @@
       { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
     ],
     "galleries": [
-      { "id": "gal-002a", "imageUrl": "https://storage.waykananexplore.com/images/curup_gangsa_1.jpg", "isPrimary": true }
+      { "id": "gal-002a", "imageUrl": "assets/images/curup_gangsa_1.jpg", "isPrimary": true }
     ]
   },
   {
     "id": "dest-003",
     "name": "Kampung Wisata Gedung Batin",
-    "imageUrl": "https://storage.waykananexplore.com/images/gedung_batin_1.jpg",
+    "imageUrl": "assets/images/gedung_batin_1.jpg",
     "location": {
       "address": "Gedung Batin, Blambangan Umpu, Way Kanan, Lampung",
       "latitude": -4.4890,
@@ -81,13 +81,13 @@
       { "id": "cat-005", "name": "Culture & History", "icon": "museum_outlined" }
     ],
     "galleries": [
-      { "id": "gal-003a", "imageUrl": "https://storage.waykananexplore.com/images/gedung_batin_1.jpg", "isPrimary": true }
+      { "id": "gal-003a", "imageUrl": "assets/images/gedung_batin_1.jpg", "isPrimary": true }
     ]
   },
   {
     "id": "dest-004",
     "name": "Arung Jeram Sungai Way Besai",
-    "imageUrl": "https://storage.waykananexplore.com/images/sungai_way_besai.jpg",
+    "imageUrl": "assets/images/sungai_way_besai.jpg",
     "location": {
       "address": "Banjit, Way Kanan, Lampung",
       "latitude": -4.6600,
@@ -109,7 +109,7 @@
       { "id": "cat-006", "name": "Adventure", "icon": "kayaking_outlined" }
     ],
     "galleries": [
-      { "id": "gal-004a", "imageUrl": "https://storage.waykananexplore.com/images/sungai_way_besai.jpg", "isPrimary": true }
+      { "id": "gal-004a", "imageUrl": "assets/images/sungai_way_besai.jpg", "isPrimary": true }
     ]
   },
   {
@@ -137,13 +137,13 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-005a", "imageUrl": "https://storage.waykananexplore.com/images/air_terjun_tirta_haji.jpg", "isPrimary": true }
+      { "id": "gal-005a", "imageUrl": "assets/images/air_terjun_tirta_haji.jpg", "isPrimary": true }
     ]
   },
   {
     "id": "dest-006",
     "name": "Goa Kelelawar",
-    "imageUrl": "https://storage.waykananexplore.com/images/goa_kelelawar.jpg",
+    "imageUrl": "assets/images/goa_kelelawar.jpg",
     "location": {
       "address": "Blambangan Umpu, Way Kanan, Lampung",
       "latitude": -4.4500,
@@ -165,13 +165,13 @@
       { "id": "cat-006", "name": "Adventure", "icon": "kayaking_outlined" }
     ],
     "galleries": [
-      { "id": "gal-006a", "imageUrl": "https://storage.waykananexplore.com/images/goa_kelelawar.jpg", "isPrimary": true }
+      { "id": "gal-006a", "imageUrl": "assets/images/goa_kelelawar.jpg", "isPrimary": true }
     ]
   },
   {
     "id": "dest-007",
     "name": "Bukit Barisan Selatan (Area Way Kanan)",
-    "imageUrl": "https://storage.waykananexplore.com/images/bukit_barisan.jpg",
+    "imageUrl": "assets/images/bukit_barisan.jpg",
     "location": {
       "address": "TNBBS Way Kanan, Lampung",
       "latitude": -4.7200,
@@ -193,7 +193,7 @@
       { "id": "cat-003", "name": "Outdoors", "icon": "hiking_outlined" }
     ],
     "galleries": [
-      { "id": "gal-007a", "imageUrl": "https://storage.waykananexplore.com/images/bukit_barisan.jpg", "isPrimary": true }
+      { "id": "gal-007a", "imageUrl": "assets/images/bukit_barisan.jpg", "isPrimary": true }
     ]
   },
   {
@@ -221,7 +221,7 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-008a", "imageUrl": "https://storage.waykananexplore.com/images/curup_kereta_1.jpg", "isPrimary": true }
+      { "id": "gal-008a", "imageUrl": "assets/images/curup_kereta_1.jpg", "isPrimary": true }
     ]
   },
   {
@@ -248,7 +248,7 @@
       { "id": "cat-007", "name": "Relaxation", "icon": "spa_outlined" }
     ],
     "galleries": [
-      { "id": "gal-009a", "imageUrl": "https://storage.waykananexplore.com/images/hot_spring_juku_batu.jpg", "isPrimary": true }
+      { "id": "gal-009a", "imageUrl": "assets/images/hot_spring_juku_batu.jpg", "isPrimary": true }
     ]
   },
   {
@@ -276,7 +276,7 @@
       { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
     ],
     "galleries": [
-      { "id": "gal-010a", "imageUrl": "https://storage.waykananexplore.com/images/bendungan_way_umpu.jpg", "isPrimary": true }
+      { "id": "gal-010a", "imageUrl": "assets/images/bendungan_way_umpu.jpg", "isPrimary": true }
     ]
   },
   {
@@ -304,7 +304,7 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-011a", "imageUrl": "https://storage.waykananexplore.com/images/curup_jepun.jpg", "isPrimary": true }
+      { "id": "gal-011a", "imageUrl": "assets/images/curup_jepun.jpg", "isPrimary": true }
     ]
   },
   {
@@ -332,7 +332,7 @@
       { "id": "cat-006", "name": "Adventure", "icon": "kayaking_outlined" }
     ],
     "galleries": [
-      { "id": "gal-012a", "imageUrl": "https://storage.waykananexplore.com/images/bukit_punggur.jpg", "isPrimary": true }
+      { "id": "gal-012a", "imageUrl": "assets/images/bukit_punggur.jpg", "isPrimary": true }
     ]
   },
   {
@@ -359,7 +359,7 @@
       { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
     ],
     "galleries": [
-      { "id": "gal-013a", "imageUrl": "https://storage.waykananexplore.com/images/lembah_hijau_wk.jpg", "isPrimary": true }
+      { "id": "gal-013a", "imageUrl": "assets/images/lembah_hijau_wk.jpg", "isPrimary": true }
     ]
   },
   {
@@ -387,7 +387,7 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-014a", "imageUrl": "https://storage.waykananexplore.com/images/curup_kincir.jpg", "isPrimary": true }
+      { "id": "gal-014a", "imageUrl": "assets/images/curup_kincir.jpg", "isPrimary": true }
     ]
   },
   {
@@ -415,7 +415,7 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-015a", "imageUrl": "https://storage.waykananexplore.com/images/curup_tayan.jpg", "isPrimary": true }
+      { "id": "gal-015a", "imageUrl": "assets/images/curup_tayan.jpg", "isPrimary": true }
     ]
   },
   {
@@ -443,7 +443,7 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-016a", "imageUrl": "https://storage.waykananexplore.com/images/cangkah_kidau.jpg", "isPrimary": true }
+      { "id": "gal-016a", "imageUrl": "assets/images/cangkah_kidau.jpg", "isPrimary": true }
     ]
   },
   {
@@ -471,7 +471,7 @@
       { "id": "cat-004", "name": "Family Friendly", "icon": "family_restroom_outlined" }
     ],
     "galleries": [
-      { "id": "gal-017a", "imageUrl": "https://storage.waykananexplore.com/images/hutan_kota_bu.jpg", "isPrimary": true }
+      { "id": "gal-017a", "imageUrl": "assets/images/hutan_kota_bu.jpg", "isPrimary": true }
     ]
   },
   {
@@ -499,7 +499,7 @@
       { "id": "cat-008", "name": "Agrotourism", "icon": "agriculture_outlined" }
     ],
     "galleries": [
-      { "id": "gal-018a", "imageUrl": "https://storage.waykananexplore.com/images/margo_mulyo.jpg", "isPrimary": true }
+      { "id": "gal-018a", "imageUrl": "assets/images/margo_mulyo.jpg", "isPrimary": true }
     ]
   },
   {
@@ -526,7 +526,7 @@
       { "id": "cat-001", "name": "Nature", "icon": "park_outlined" }
     ],
     "galleries": [
-      { "id": "gal-019a", "imageUrl": "https://storage.waykananexplore.com/images/danau_lebar.jpg", "isPrimary": true }
+      { "id": "gal-019a", "imageUrl": "assets/images/danau_lebar.jpg", "isPrimary": true }
     ]
   },
   {
@@ -554,7 +554,7 @@
       { "id": "cat-002", "name": "Waterfall", "icon": "water_drop_outlined" }
     ],
     "galleries": [
-      { "id": "gal-020a", "imageUrl": "https://storage.waykananexplore.com/images/curup_kembar.jpg", "isPrimary": true }
+      { "id": "gal-020a", "imageUrl": "assets/images/curup_kembar.jpg", "isPrimary": true }
     ]
   }
 ]
