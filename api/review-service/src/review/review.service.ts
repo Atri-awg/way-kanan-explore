@@ -177,4 +177,53 @@ export class ReviewService {
       },
     };
   }
+
+  async getAverageRating(
+    destinationId: string,
+  ) {
+    const reviews =
+      await this.prisma.review.findMany({
+        where: {
+          destinationId,
+          deletedAt: null,
+        },
+      });
+
+    const totalReview =
+      reviews.length;
+
+    const averageRating =
+      totalReview > 0
+        ? reviews.reduce(
+            (
+              sum: number,
+              review: Review,
+            ) =>
+              sum +
+              review.rating,
+            0,
+          ) / totalReview
+        : 0;
+
+    return {
+      success: true,
+      metadata: {
+        status: HttpStatus.OK,
+      },
+      data: {
+        destinationId,
+        average_rating:
+          Number(
+            averageRating.toFixed(
+              1,
+            ),
+          ),
+        total_review:
+          totalReview,
+      },
+    };
+  }
+}
+
+  
 }
