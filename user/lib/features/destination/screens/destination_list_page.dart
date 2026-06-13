@@ -22,6 +22,11 @@ class _DestinationListPageState extends State<DestinationListPage> {
   final TextEditingController searchController = TextEditingController();
 
   @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
   void initState() {
     super.initState();
     loadDestinations();
