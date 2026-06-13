@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const API_KATEGORI = "http://localhost:3002/api/kategori";
+const API_KATEGORI = `${process.env.NEXT_PUBLIC_KATEGORI_API}/api/kategori`;
 
 export default function TambahKategoriPage() {
   const router = useRouter();
