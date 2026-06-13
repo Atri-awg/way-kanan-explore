@@ -39,7 +39,8 @@ class DestinationListPage extends StatelessWidget {
           print(destinations.first.name);
           print(destinations.first.toJson());
 
-          return ListView.builder(
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             itemCount: destinations.length,
             itemBuilder: (context, index) {
               final destination = destinations[index];
@@ -56,6 +57,9 @@ class DestinationListPage extends StatelessWidget {
                   );
                 },
               );
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(height: 8);
             },
           );
         },
